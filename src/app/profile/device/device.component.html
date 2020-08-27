@@ -1,0 +1,70 @@
+  <h1><b>{{profileTitle}}</b></h1>
+  <h3>{{profileSlogan}}</h3>
+
+  <!-- R1: Add Profile Tabs-->
+  <button mat-raised-button color="primary" (click)="addTab()">Add {{profileType}}</button>
+  <br>
+  <br>
+  <mat-tab-group animationDuration="0ms">
+  <mat-tab *ngFor="let tab of tabs; let index = index;" [label]= tabs[index].name>
+    <ng-template matTabContent>
+
+    <br>
+    <br>
+  <!--START Nickname-->
+    <!--R1.1 Input box to allow the user to set a nickname-->
+
+    <div class="container">
+      <!--Check if the user has set a nickname or not-->
+      <div *ngIf="tabs[index].name !== profileType; else elseBlock">
+        <h2><b>Nickname for device: </b> {{tabs[index].name}}</h2>
+        <button mat-raised-button color="primary" (click)="tabs[index].name=profileType">Edit</button>
+      </div>
+      <!--User has not set a nickname-->
+      <ng-template #elseBlock>
+        <h2><b>Device Nickname</b></h2>
+        <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index)">
+          <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+          <mat-label>Choose a nickname for this device:</mat-label>
+          <input matInput type="text" name="newname" ngModel placeholder="Nickname"  required>
+          <mat-hint>E.g- Laptop1,WorkPhone2, AppleWatch1</mat-hint>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary">Confirm</button>
+        </form>
+      </ng-template>
+    </div>
+  <!--END Nickname-->
+
+    <!--START Login Methods Section-->
+    <app-login-methods
+    [deviceObject]="tabs[index]"
+    [deviceIndex]="index"
+    (updateObject)="updateObject($event)"
+    ></app-login-methods>
+
+    <!-- END Login Methods Section-->
+
+    <!--START Login Details Section-->
+      <!-- R3: Load login method details-->
+    <!--END Login Details Section-->
+
+    <!--START Open Sessions Section-->
+      <!-- R4: Load login method details-->
+    <!--END Open Sessions Section-->
+
+    <!--START Footer -->
+    <br>
+      <!-- R5: Remove Profile Button-->
+      <button mat-raised-button color="warn" (click)="removeTab(index)" class="right">
+        Delete {{profileType}}
+      </button>
+
+    <!--END Footer -->
+
+  </ng-template>
+  </mat-tab>
+</mat-tab-group>
+<!-- R6: nEXT Option Section -->
+<br>
+<button mat-raised-button color="primary" class="right">Next Section ></button>

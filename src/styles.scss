@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body{
+  margin: 0;
+}
+
+button{
+  border-radius: 5px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #000;
+}
+
+.right{
+  position: absolute;
+  float: right;
+  margin: 0;
+}
+
+/**START Grid system scss**/
+.container{
+  width: calc(100% - 2em);
+  max-width: 60em;
+  margin: 2% auto;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+$columns: 12;
+
+@for $i from 1 through $columns{
+  .col-#{$i}{
+    flex: 0 0 100% / $columns * $i;
+  }
+  .col-offset-#{$i}{
+    margin-left: 100% / $columns * $i;
+  }
+ }
+
+ /**END Grid system scss**/

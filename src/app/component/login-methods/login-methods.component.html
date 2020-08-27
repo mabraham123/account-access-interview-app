@@ -1,0 +1,40 @@
+<br>
+<!-- R2: Options List-->
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2><b>Summary:</b></h2>
+      <p>Login methods and what you need to access this account</p>
+    </div>
+    <div class="col-6">
+      <!-- R2.1: Add Options Button-->
+      <button mat-raised-button color="primary" type="button" name="button" (click)="CreateOption()">+ Add Option</button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <!-- R2.2: Load Login Methods-->
+  <div class="row">
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let option of options; let index = index;">
+        <div class="col-4">
+          <b>{{ options[index].name }}</b>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.1: Add login Method button-->
+          <!-- R2.2.1.1: Add login method modal-->
+          <button mat-mini-fab color="primary">+</button>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.2: Remove login Method button-->
+          <button mat-mini-fab color="warn" (click)="removeTab(index)">-</button>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.3: Recovery login Method Checkbox-->
+          <!-- <mat-checkbox [(ngModel)]="checked">Recovery</mat-checkbox> -->
+          <mat-checkbox  (change)="setRecovery($event.checked,index)" [checked]=options[index].recovery color="primary">Recovery</mat-checkbox>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+</div>

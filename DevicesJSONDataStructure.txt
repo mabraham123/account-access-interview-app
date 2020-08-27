@@ -1,0 +1,21 @@
+[{
+name: "iphone1",
+type: "Device",
+incoming:[
+	    {
+	     name:"Option1",
+	     recovery: false,
+	     needed:[
+                     {
+		      name:pwd,
+		      detail:{
+			      pwdDetails:"Strong"
+			     }
+		      },
+		      {
+		       name: email1
+		      }
+		    ]
+	     }
+	  ]	
+},{...},{...}]
