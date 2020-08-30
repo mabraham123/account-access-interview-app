@@ -1,4 +1,11 @@
-import { Component, OnInit, Input,Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter,Injectable} from '@angular/core';
+// import { ModalComponent } from "../modal/modal.component";
+// import { MatDialog } from "@angular/material/dialog";
+// import { MatDialogModule } from "@angular/material/dialog";
+
+import { MatDialog ,MatDialogRef} from '@angular/material/dialog';
+
+import { ModalComponent } from '../modal/modal.component';
 
 
 
@@ -11,7 +18,10 @@ export class LoginMethodsComponent implements OnInit{
 
   @Input() deviceObject;
   @Input() deviceIndex;
-  constructor(){
+
+  private dialogRef: MatDialogRef<ModalComponent>
+
+  constructor(public dialog: MatDialog) {
   }
 
   @Output() updateObject: EventEmitter<any>= new EventEmitter()
@@ -88,7 +98,29 @@ export class LoginMethodsComponent implements OnInit{
 
   }
 
+  onCreate(index: number){
+    this.dialogRef = this.dialog.open(ModalComponent);
 
+    this.dialogRef.afterClosed().subscribe(result => {
+      //Check if not empty
+      if (result !== null && result !== undefined) {
+        //Wrap result in an object to add to the needed array
+        console.log("Good");
+        let neededForLoginMethod={
+            name: result,
+            details:""
+        }
+        this.options[index].needed.push(neededForLoginMethod);
 
+        this.updateParentObjectArray();
+      }
+    });
+  }
+
+  removeLoginItemNeeded(indexOfOption: number, indexOfLoginItem: number){
+    this.options[indexOfOption].needed.splice(indexOfLoginItem, 1);
+    //Send the final device object with parent array index to the replaced in the parent array of devices
+    this.updateParentObjectArray();
+  }
 
 }

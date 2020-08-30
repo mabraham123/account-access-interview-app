@@ -1,0 +1,28 @@
+<div class="row">
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let option of options; let index = index;">
+        <div class="col-4">
+          <b>{{ options[index].name }}</b>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.1: Add login Method button-->
+          <!-- R2.2.1.1: Add login method modal-->
+          <button mat-mini-fab color="primary" (click)="onCreate(index)">+</button>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.2: Remove login Method button-->
+          <button mat-mini-fab color="warn" (click)="removeTab(index)">-</button>
+        </div>
+        <div class="col-3">
+          <!-- R2.2.3: Recovery login Method Checkbox-->
+          <!-- <mat-checkbox [(ngModel)]="checked">Recovery</mat-checkbox> -->
+          <mat-checkbox  (change)="setRecovery($event.checked,index)" [checked]=options[index].recovery color="primary">Recovery</mat-checkbox>
+        </div>
+        <div class="col-12" *ngFor="let item of options[index].needed; let i= index">
+          <br>
+          <mat-list-item>{{ options[index].needed[i].name }}</mat-list-item>
+          <button mat-mini-fab color="warn" (click)="removeLoginItemNeeded(index, i)">X</button>
+        </div>
+    </mat-list-item>
+  </mat-list>
+</div>

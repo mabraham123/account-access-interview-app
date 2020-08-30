@@ -4,14 +4,16 @@ import { FormsModule } from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
 import { NicknameComponent } from '../component/nickname/nickname.component';
 import { LoginMethodsComponent } from '../component/login-methods/login-methods.component';
+import { ModalComponent } from '../component/modal/modal.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
+import {MatListModule} from  '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const MaterialComponents=[
   MatButtonModule,
@@ -20,12 +22,14 @@ const MaterialComponents=[
   MatFormFieldModule,
   MatInputModule,
   MatListModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDialogModule
 ];
 
 
 @NgModule({
-  declarations: [DeviceComponent, NicknameComponent, LoginMethodsComponent],
+  declarations: [DeviceComponent, NicknameComponent, LoginMethodsComponent, ModalComponent],
+  entryComponents: [ModalComponent],
   imports: [
     CommonModule,
     FormsModule,

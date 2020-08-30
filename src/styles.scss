@@ -33,11 +33,14 @@ hr {
   margin: 2% auto;
 }
 
+
+
+
+
 .row{
   display: flex;
   flex-wrap: wrap;
 }
-
 $columns: 12;
 
 @for $i from 1 through $columns{
@@ -47,6 +50,7 @@ $columns: 12;
   .col-offset-#{$i}{
     margin-left: 100% / $columns * $i;
   }
- }
+}
+
 
  /**END Grid system scss**/

@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule} from './material/material.module';
 import { ProfileModule } from "./profile/profile.module";
+import { ModalComponent } from "./component/modal/modal.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
+  entryComponents:[ModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
