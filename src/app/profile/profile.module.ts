@@ -23,7 +23,7 @@ const MaterialComponents=[
   MatInputModule,
   MatListModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
 ];
 
 

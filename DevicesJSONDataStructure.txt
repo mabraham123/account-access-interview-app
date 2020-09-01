@@ -1,16 +1,13 @@
-[{
+Devices[{
 name: "iphone1",
-type: "Device",
 incoming:[
 	    {
-	     name:"Option1",
 	     recovery: false,
 	     needed:[
                      {
-		      name:pwd,
-		      detail:{
-			      pwdDetails:"Strong"
-			     }
+		      name:pwd(Pointer for index in passwords[]),
+		      type:Password (Remove)
+		      	//Add data to the correct index in Passwords[]
 		      },
 		      {
 		       name: email1
@@ -19,3 +16,24 @@ incoming:[
 	     }
 	  ]	
 },{...},{...}]
+
+Passwords[Hold detail for specific passwords
+{
+name:pwd,
+Strength: Strong,
+Incoming:[{
+	name:PM1
+	type:PasswordManager
+}]
+
+},
+{
+name:pwd,
+Strength: Strong,
+Incoming:[{
+	name:PM1,
+	type:PasswordManager
+}]}
+]
+
+...

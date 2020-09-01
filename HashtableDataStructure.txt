@@ -1,0 +1,38 @@
+accountgraph {
+"d1": {
+name: "iphone1",
+type: "device",
+incoming:[
+	    {
+	     recovery: false,
+	     needed: [ "k1", "k2"]
+	    },
+            {
+             recovery: true,
+	     needed: [ "k1", "k3"]
+             }
+
+	  ]
+},
+ "k1": {...},
+ "k2: {
+name:"pwd",
+type: "password",
+Strength: Strong,
+incoming:[{
+	recovery:false
+	needed: [PM1]
+}]
+},
+
+"k3": {
+name:"pwd2",
+type: "password"
+Strength: Strong,
+incoming:[{
+	recovery:false,
+	needed:[PM1]
+}]}
+]
+
+...

@@ -16,8 +16,8 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class LoginMethodsComponent implements OnInit{
 
-  @Input() deviceObject;
-  @Input() deviceIndex;
+  @Input() key;
+  @Input() OriginalIncoming;
 
   private dialogRef: MatDialogRef<ModalComponent>
 
@@ -25,12 +25,13 @@ export class LoginMethodsComponent implements OnInit{
   }
 
   @Output() updateObject: EventEmitter<any>= new EventEmitter()
+  @Output() createNewKey: EventEmitter<any>= new EventEmitter()
   options: any[] = [];
   full: boolean= false;
   recovery: boolean=false;
 
   ngOnInit(): void {
-    this.options=this.deviceObject.incoming;
+    this.options=this.OriginalIncoming;
 
     //
     // if (this.deviceObject.incoming.length<1) {
@@ -42,14 +43,19 @@ export class LoginMethodsComponent implements OnInit{
 
   updateParentObjectArray(){
     //replace the incoming array of the temp devices object with the options array
-    this.deviceObject.incoming=this.options;
+    this.OriginalIncoming=this.options;
 
     let updatedObject={
-      update: this.deviceObject,
-      index: this.deviceIndex
+      update: this.OriginalIncoming,
+      key: this.key
     }
 
     this.updateObject.emit(updatedObject);
+  }
+
+  sendSingaltoCreateNewKey(data){
+
+    this.createNewKey.emit(data);
   }
 
   //this.deviceObject.incoming=this.options;
@@ -106,13 +112,12 @@ export class LoginMethodsComponent implements OnInit{
       if (result !== null && result !== undefined) {
         //Wrap result in an object to add to the needed array
         console.log("Good");
-        let neededForLoginMethod={
-            name: result,
-            details:""
-        }
-        this.options[index].needed.push(neededForLoginMethod);
+
+        let name=result.type+": "+result.nickname;
+        this.options[index].needed.push(name);
 
         this.updateParentObjectArray();
+        this.sendSingaltoCreateNewKey(result);
       }
     });
   }

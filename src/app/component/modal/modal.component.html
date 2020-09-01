@@ -1,9 +1,15 @@
 <h1 mat-dialog-title>Add Item</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Option</mat-label>
-    <input matInput [(ngModel)]="input" required>
+  <mat-form-field appearance="fill">
+    <mat-label>Nickname of item</mat-label>
+    <input matInput [(ngModel)]="input" placeholder="Nickname" required>
   </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Item Type</mat-label>
+    <input matInput [(ngModel)]="type" placeholder="Type" required>
+  </mat-form-field>
+  <br>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close()">Close</button>

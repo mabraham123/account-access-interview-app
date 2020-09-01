@@ -17,19 +17,19 @@
     <ul role="list">
       <li *ngFor="let option of options; let index = index;">
         <div class="col-12">
+          <!-- R2.2.1: Remove login Method button-->
+          <button class="extra" mat-button color="warn" (click)="removeTab(index)">X</button>
           <b class="title">{{ options[index].name }}</b>
-          <!-- R2.2.1: Add login Method button-->
-            <!-- R2.2.1.1: Add login method modal-->
-          <button class="extra" mat-mini-fab color="primary" (click)="onCreate(index)">+</button>
-          <!-- R2.2.2: Remove login Method button-->
-          <button class="extra" mat-mini-fab color="warn" (click)="removeTab(index)">-</button>
-          <!-- R2.2.3: Recovery login Method Checkbox-->
-          <mat-checkbox class="extra" (change)="setRecovery($event.checked,index)" [checked]=options[index].recovery color="primary">Recovery</mat-checkbox>
+          <!-- R2.2.2: Add login Method button-->
+          <!-- R2.2.2.1: Add login method modal-->
+        <button class="extra" mat-flat-button color="primary" (click)="onCreate(index)">+ Add</button>
+        <!-- R2.2.3: Recovery login Method Checkbox-->
+        <mat-checkbox class="extra2" [labelPosition]="before" (change)="setRecovery($event.checked,index)" [checked]="options[index].recovery"   color="primary">Recovery</mat-checkbox>
         </div>
         <ul>
           <br>
         <li class="col-12 decoration" *ngFor="let item of options[index].needed; let i= index">
-          {{ options[index].needed[i].name }}
+          {{ options[index].needed[i] }}
           <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(index, i)">x</button>
         </li>
         <br>

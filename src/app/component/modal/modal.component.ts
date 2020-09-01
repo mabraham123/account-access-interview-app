@@ -11,6 +11,7 @@ export class ModalComponent {
   constructor(public dialogRef: MatDialogRef<ModalComponent>) { }
 
   input: string="";
+  type: string="";
 
   close(): void {
 
@@ -18,7 +19,11 @@ export class ModalComponent {
     if (this.input==="") {
       this.dialogRef.close();
     }else{
-      this.dialogRef.close(this.input);
+      let sendBack={
+        nickname:this.input,
+        type:this.type,
+      }
+      this.dialogRef.close(sendBack);
     }
   }
 }

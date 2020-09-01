@@ -6,7 +6,7 @@
   <br>
   <br>
   <mat-tab-group animationDuration="0ms">
-  <mat-tab *ngFor="let tab of tabs; let index = index;" [label]= tabs[index].name>
+  <mat-tab *ngFor="let tab of tabs; let index = index;" [label]= "accountgraph[tabs[index]].name">
     <ng-template matTabContent>
 
     <br>
@@ -16,9 +16,9 @@
 
     <div class="container">
       <!--Check if the user has set a nickname or not-->
-      <div *ngIf="tabs[index].name !== profileType; else elseBlock">
-        <h2><b>Nickname for device: </b> {{tabs[index].name}}</h2>
-        <button mat-raised-button color="primary" (click)="tabs[index].name=profileType">Edit</button>
+      <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
+        <h2><b>Nickname for device: </b> {{accountgraph[tabs[index]].name}}</h2>
+        <button mat-raised-button color="primary" (click)="accountgraph[tabs[index]].name=profileType">Edit</button>
       </div>
       <!--User has not set a nickname-->
       <ng-template #elseBlock>
@@ -38,9 +38,10 @@
 
     <!--START Login Methods Section-->
     <app-login-methods
-    [deviceObject]="tabs[index]"
-    [deviceIndex]="index"
+    [key]="tabs[index]"
+    [OriginalIncoming]="accountgraph[tabs[index]].incoming"
     (updateObject)="updateObject($event)"
+    (createNewKey)="createNewKey($event)"
     ></app-login-methods>
 
     <!-- END Login Methods Section-->
@@ -68,3 +69,4 @@
 <!-- R6: nEXT Option Section -->
 <br>
 <button mat-raised-button color="primary" class="right">Next Section ></button>
+<button mat-stroked-button>Add Note</button>

@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'account-access-interview-app';
+  accountgraph={};
+
 
 }
