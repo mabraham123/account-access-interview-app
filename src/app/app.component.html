@@ -1,12 +1,23 @@
 <div class="container">
-  <app-device
-  [accountgraph]="accountgraph"
-  (getAccountgraph)="getAccountgraph($event)"
-  >
-  </app-device>
-  <!-- <app-passwordmanager
-  [accountgraph]="accountgraph">
-  </app-passwordmanager> -->
+
+  <div *ngIf="currentPage===0">
+    <app-device
+    [accountgraph]="accountgraph"
+    [tabs]="devicesKeys"
+    (getAccountgraph)="getAccountgraph($event)"
+    (getDeviceKeys)="getDeviceKeys($event)"
+    >
+    </app-device>
+  </div>
+  <div *ngIf="currentPage===1">
+    <app-passwordmanager
+    [accountgraph]="accountgraph"
+    [tabs]="passwordmanagerKeys"
+    (getAccountgraph)="getAccountgraph($event)"
+    (getPasswordmanagerKeys)="getPasswordmanagerKeys($event)"
+    >
+    </app-passwordmanager>
+  </div>
 </div>
 
 

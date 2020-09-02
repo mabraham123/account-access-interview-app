@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
-import { NicknameComponent } from '../component/nickname/nickname.component';
 import { LoginMethodsComponent } from '../component/login-methods/login-methods.component';
 import { ModalComponent } from '../component/modal/modal.component';
 // import { NotesComponent } from '../component/notes/notes.component';
@@ -35,7 +34,7 @@ const MaterialComponents=[
 
 
 @NgModule({
-  declarations: [DeviceComponent, NicknameComponent, LoginMethodsComponent, ModalComponent, PasswordmanagerComponent],
+  declarations: [DeviceComponent, LoginMethodsComponent, ModalComponent, PasswordmanagerComponent],
   entryComponents: [ModalComponent],
   imports: [
     CommonModule,
@@ -43,19 +42,11 @@ const MaterialComponents=[
     MaterialComponents
   ],
   exports:[
-    DeviceComponent
+    DeviceComponent,
+    PasswordmanagerComponent
   ]
 })
 
 export class ProfileModule {
-  // accountsArray: any=[];
-  //
-  // public addToAccountsArray(account: Account){
-  //   this.accountsArray.push(account);
-  // }
-  //
-  // public getAccountsArray(){
-  //   return this.accountsArray;
-  // }
 
 }

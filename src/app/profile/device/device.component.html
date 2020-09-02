@@ -18,12 +18,12 @@
     <div class="container">
       <!--Check if the user has set a nickname or not-->
       <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
-        <h2><b>Nickname for device: </b> {{accountgraph[tabs[index]].name}}</h2>
+        <h2><b>Nickname for {{profileType}}: </b> {{accountgraph[tabs[index]].name}}</h2>
         <button mat-raised-button color="primary" (click)="accountgraph[tabs[index]].name=profileType">Edit</button>
       </div>
       <!--User has not set a nickname-->
       <ng-template #elseBlock>
-        <h2><b>Device Nickname</b></h2>
+        <h2><b>{{profileType}} Nickname</b></h2>
         <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index)">
           <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
           <mat-label>Choose a nickname for this device:</mat-label>
@@ -49,17 +49,17 @@
 
 
     <mat-divider></mat-divider>
-    <!--START See messaged when device is locked Section-->
-    <div class="container">
-      <!-- R3: Ask if messages can ve seen if the device is locked radio buttons-->
-      <h2><b>Can you view messages and notification on this device when it is locked</b></h2>
-      <mat-radio-group [(ngModel)]="accountgraph[tabs[index]].ViewWhenLocked" aria-label="Select an option">
-        <mat-radio-button value="true">Yes</mat-radio-button>
-        <mat-radio-button value="false">No</mat-radio-button>
-      </mat-radio-group>
-      
-    </div>
-      <!--END Open Sessions Section-->
+          <!--START See messaged when device is locked Section-->
+          <div class="container">
+            <!-- R3: Ask if messages can ve seen if the device is locked radio buttons-->
+            <h2><b>Can you view messages and notification on this device when it is locked</b></h2>
+            <mat-radio-group [(ngModel)]="accountgraph[tabs[index]].ViewWhenLocked" aria-label="Select an option">
+              <mat-radio-button value="true">Yes</mat-radio-button>
+              <mat-radio-button value="false">No</mat-radio-button>
+            </mat-radio-group>
+            
+          </div>
+            <!--END Open Sessions Section-->
 
     <!--START Footer -->
     <br>
@@ -88,7 +88,7 @@
     <div class="col-2"><p *ngIf="NumberofNotes>0">Notes: {{NumberofNotes}}</p></div>
     <div class="col-2">
       <!-- R5: Next Option Section -->
-      <button mat-raised-button color="primary" class="right" (click)="sendBackAccountgraph()">Next Section  ></button>
+      <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage()" > Next Section  ></button>
     </div>
   </div>
 </div>

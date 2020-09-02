@@ -8,15 +8,16 @@ import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
 
 export class DeviceComponent  implements OnInit{
     @Input() accountgraph;
+    @Input() tabs
     @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
+    @Output() getDeviceKeys: EventEmitter<any>= new EventEmitter()
 
-  // TODO: Move into a constructor
     profileTitle: string= 'Devices';
     profileSlogan: string= 'What devices do you use to access the internet? '
     profileType: string= 'Device'
 
 
-  tabs: any[] = [];
+  //tabs: any[] = [];
   //notes: any[]= [];
   name: string;
   newname: string;
@@ -37,6 +38,7 @@ export class DeviceComponent  implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log(this.tabs)
   }
 
   /**
@@ -65,36 +67,10 @@ export class DeviceComponent  implements OnInit{
     console.log(this.tabs);
 
 
-    // let potentialKey=this.profileType+this.name;
-    //
-    // //Check if name exists
-    // if(!(this.accountgraph.hasOwnProperty(potentialKey))){
-    //   //Does not exist in hashtable
-    //   //Create Item
-    //   this.accountgraph[potentialKey]={
-    //     name: this.name,
-    //     type: this.profileType,
-    //     incoming: []
-    //   }
-    //
-    //   //Save key in array
-    //   this.tabs.push(potentialKey);
-    // }else{
-    //   this.exists= true;
-    // }
-    //
-    // console.log(this.tabs);
-    // console.log(this.accountgraph);
 
   }
 
   updateObject(data){
-    // console.log("this is the one:");
-    // console.log(data);
-    // this.tabs[data.index]=data.update;
-    // console.log("this is the too:");
-    // console.log(this.tabs);
-
     this.accountgraph[data.key].incoming=data.update;
     console.log(this.accountgraph);
   }
@@ -163,26 +139,15 @@ createNewKey(data){
     }else{
       alert("Error: Look like you have already used that one, try another nickname");
     }
-
-
-
-
-  // let potentialKey=this.profileType+name1;
-  //
-  // if(!(this.accountgraph.hasOwnProperty(potentialKey))){
-  //   let oldname=this.profileType+this.name
-  //   //Does not exist in hashtable
-  //   this.accountgraph[potentialKey]=this.accountgraph[oldname]
-  //   delete this.accountgraph[oldname];
-  //   //Save key in array
-  //   this.tabs.push(potentialKey);
-  // }else{
-  //   alert("Choose a new name");
-  // }
 }
 
-sendBackAccountgraph(){
-  this.getAccountgraph.emit(this.accountgraph);
+prepareToChangePage(){
+  this.getAccountgraph.emit({
+    changePageTo: 1,
+    accountgraph:this.accountgraph
+  });
+
+  this.getDeviceKeys.emit(this.tabs);
 }
 
 
