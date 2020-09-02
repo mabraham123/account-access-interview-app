@@ -24,7 +24,7 @@
           <!-- R2.2.2.1: Add login method modal-->
         <button class="extra" mat-flat-button color="primary" (click)="onCreate(index)">+ Add</button>
         <!-- R2.2.3: Recovery login Method Checkbox-->
-        <mat-checkbox class="extra2" [labelPosition]="before" (change)="setRecovery($event.checked,index)" [checked]="options[index].recovery"   color="primary">Recovery</mat-checkbox>
+        <mat-checkbox class="extra2" (change)="setRecovery($event.checked,index)" [checked]="options[index].recovery"   color="primary">Recovery</mat-checkbox>
         </div>
         <ul>
           <br>

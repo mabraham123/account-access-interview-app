@@ -1,5 +1,5 @@
-import { Component, OnInit, Input} from '@angular/core';
-
+import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
+//ViewContainerRef, ComponentFactoryResolver
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
@@ -8,6 +8,7 @@ import { Component, OnInit, Input} from '@angular/core';
 
 export class DeviceComponent  implements OnInit{
     @Input() accountgraph;
+    @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
 
   // TODO: Move into a constructor
     profileTitle: string= 'Devices';
@@ -16,16 +17,23 @@ export class DeviceComponent  implements OnInit{
 
 
   tabs: any[] = [];
+  //notes: any[]= [];
   name: string;
   newname: string;
   nicknameSet: boolean;
   exists: boolean;
-
+  NumberofNotes: number;
+  remove: boolean;
+  //NoteNumber: number;
+  //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
   constructor(){
     this.name= this.profileType;
     this.newname="";
     this.nicknameSet= false;
     this.exists=false;
+    this.NumberofNotes=0;
+    this.remove=false;
+    //this.NoteNumber=0;
   }
 
   ngOnInit(): void {
@@ -47,6 +55,7 @@ export class DeviceComponent  implements OnInit{
     this.accountgraph[potentialKey]={
       name:this.name,
       type: this.profileType,
+      ViewWhenLocked:"",
       incoming:[]
     }
 
@@ -99,6 +108,7 @@ createNewKey(data){
     this.accountgraph[potentialKey]={
       name:data.nickname,
       type:data.type,
+      ViewWhenLocked:"",
       incoming:[]
     }
   }
@@ -170,4 +180,56 @@ createNewKey(data){
   //   alert("Choose a new name");
   // }
 }
+
+sendBackAccountgraph(){
+  this.getAccountgraph.emit(this.accountgraph);
+}
+
+
+//TODO- If there is time then fix the add note feature
+// Issue: currently no way of assigning a unquie token to a note
+  // updateNote(data){
+  //   console.log("asdkjashdlkasd");
+  //   let potentialKey=this.profileType+": Note"+data.token;
+  //   if(data.save){
+  //     //save Note
+      
+  //     if(this.accountgraph.hasOwnProperty(potentialKey)){
+  //       //Aready exists
+  //       this.accountgraph[potentialKey].note=data.info
+  //     }else{
+  //       //Does not exist- create note
+  //       this.accountgraph[potentialKey]={
+  //         name: "Note"+data.token,
+  //         note: data.info
+  //       }
+  //     }
+  //   }else{
+  //     console.log(data.token);
+  //     //delete Note from notes array
+  //     this.notes.splice(data.token,1);
+  //     //delete note from hashtable
+  //     delete this.accountgraph[potentialKey];
+      
+  //   }
+  //   console.log(this.notes);
+  //     console.log(this.accountgraph);
+
+  // }
+
+  // addNote(){
+  //   this.notes[this.NoteNumber]="Note"
+  //   //this.notes.push("note");
+  //   this.NoteNumber++;
+  // }
+
+  //  async addNote(){
+  //   this.NumberofNotes++;
+  //   const {NotesComponent} = await import('../../component/notes/notes.component');
+  //   const notesComponentFactory= this.resolver.resolveComponentFactory(NotesComponent)
+  //   const notesComponentRef=this.cvRef.createComponent(notesComponentFactory);
+  //   notesComponentRef.instance.noteNumber=this.NumberofNotes;
+  // }
+
+
 }

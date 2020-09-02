@@ -1,3 +1,4 @@
+  <div class="container">
   <h1><b>{{profileTitle}}</b></h1>
   <h3>{{profileSlogan}}</h3>
 
@@ -35,7 +36,7 @@
       </ng-template>
     </div>
   <!--END Nickname-->
-
+    <mat-divider></mat-divider>
     <!--START Login Methods Section-->
     <app-login-methods
     [key]="tabs[index]"
@@ -46,27 +47,49 @@
 
     <!-- END Login Methods Section-->
 
-    <!--START Login Details Section-->
-      <!-- R3: Load login method details-->
-    <!--END Login Details Section-->
 
-    <!--START Open Sessions Section-->
-      <!-- R4: Load login method details-->
-    <!--END Open Sessions Section-->
+    <mat-divider></mat-divider>
+    <!--START See messaged when device is locked Section-->
+    <div class="container">
+      <!-- R3: Ask if messages can ve seen if the device is locked radio buttons-->
+      <h2><b>Can you view messages and notification on this device when it is locked</b></h2>
+      <mat-radio-group [(ngModel)]="accountgraph[tabs[index]].ViewWhenLocked" aria-label="Select an option">
+        <mat-radio-button value="true">Yes</mat-radio-button>
+        <mat-radio-button value="false">No</mat-radio-button>
+      </mat-radio-group>
+      
+    </div>
+      <!--END Open Sessions Section-->
 
     <!--START Footer -->
     <br>
-      <!-- R5: Remove Profile Button-->
+      <!-- R4: Remove Profile Button-->
       <button mat-raised-button color="warn" (click)="removeTab(index)" class="right">
         Delete {{profileType}}
       </button>
-
     <!--END Footer -->
 
   </ng-template>
   </mat-tab>
 </mat-tab-group>
-<!-- R6: nEXT Option Section -->
 <br>
-<button mat-raised-button color="primary" class="right">Next Section ></button>
-<button mat-stroked-button>Add Note</button>
+<mat-divider></mat-divider>  
+<br>
+  <div class="row">
+    <div class="col-8">
+      <button mat-raised-button color="primary">Add Note</button>
+      <!-- <div *ngFor="let note of notes;">
+        <app-notes
+        [token]="NoteNumber"
+        (updateNote)="updateNote($event)"
+        ></app-notes>
+      </div> -->
+    </div>
+    <div class="col-2"><p *ngIf="NumberofNotes>0">Notes: {{NumberofNotes}}</p></div>
+    <div class="col-2">
+      <!-- R5: Next Option Section -->
+      <button mat-raised-button color="primary" class="right" (click)="sendBackAccountgraph()">Next Section  ></button>
+    </div>
+  </div>
+</div>
+

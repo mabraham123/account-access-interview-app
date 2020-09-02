@@ -9,5 +9,11 @@ export class AppComponent {
   title = 'account-access-interview-app';
   accountgraph={};
 
+  getAccountgraph(data){
+    console.log("Main hashtable updated");
+    this.accountgraph=data;
+    console.log(this.accountgraph);
+  }
+
 
 }

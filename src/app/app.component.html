@@ -1,7 +1,12 @@
 <div class="container">
   <app-device
-  [accountgraph]="accountgraph">
+  [accountgraph]="accountgraph"
+  (getAccountgraph)="getAccountgraph($event)"
+  >
   </app-device>
+  <!-- <app-passwordmanager
+  [accountgraph]="accountgraph">
+  </app-passwordmanager> -->
 </div>
 
 

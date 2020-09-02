@@ -1,0 +1,25 @@
+
+<mat-accordion>
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       Note {{noteNumber}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput #text></textarea>
+      </mat-form-field>
+    </form>
+    <div class="row">
+    <div class="col-10">
+      <button class="extra" mat-raised-button color="warn" (click)="deleteNote()">Delete Note</button>
+    </div>
+    <div class="col-2">
+      <button class="extra" mat-raised-button color="primary" (click)="saveNote(text.value)">Save Note</button>
+    </div>
+  </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<br>

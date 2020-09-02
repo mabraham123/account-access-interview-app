@@ -1,7 +1,4 @@
 import { Component, OnInit, Input,Output, EventEmitter,Injectable} from '@angular/core';
-// import { ModalComponent } from "../modal/modal.component";
-// import { MatDialog } from "@angular/material/dialog";
-// import { MatDialogModule } from "@angular/material/dialog";
 
 import { MatDialog ,MatDialogRef} from '@angular/material/dialog';
 
