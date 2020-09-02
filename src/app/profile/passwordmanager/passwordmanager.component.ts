@@ -56,7 +56,7 @@ addTab() {
   this.accountgraph[potentialKey]={
     name:this.name,
     type: this.profileType,
-    ViewWhenLocked:"",
+    opensessions:[],
     incoming:[]
   }
 
@@ -74,6 +74,10 @@ updateObject(data){
   console.log(this.accountgraph);
 }
 
+updateObjectOpenSessions(data){
+  this.accountgraph[data.key].opensessions=data.update;
+  console.log(this.accountgraph);
+}
 
 createNewKey(data){
 //check if new key needs to be created
@@ -83,11 +87,13 @@ if(!(this.accountgraph.hasOwnProperty(potentialKey))){
   this.accountgraph[potentialKey]={
     name:data.nickname,
     type:data.type,
-    ViewWhenLocked:"",
+    opensessions:[],
     incoming:[]
   }
 }
 }
+
+
 
 /**
 * Method to remove a tab from the array of tabs
@@ -140,7 +146,7 @@ updateName(name1, index: number){
   }
 }
 
-sendBackAccountgraph(){
+prepareToChangePage(){
 this.getAccountgraph.emit({
   changePageTo: 0,
   accountgraph:this.accountgraph

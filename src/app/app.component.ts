@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 export class AppComponent {
   title = 'account-access-interview-app';
   accountgraph={};
-  currentPage: number=0;
+  currentPage: number=1;
   devicesKeys: any[] = [];
   passwordmanagerKeys: any[] =[];
 

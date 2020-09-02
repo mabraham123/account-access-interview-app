@@ -1,0 +1,19 @@
+<br>
+<!-- R2: Options List-->
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2><b>Open Sessions:</b></h2>
+      <p>Do you have any <span class="hovertip"><b><u matTooltip="{{tip}}"> open sessions</u></b></span> with this account
+        currently?</p>
+    </div>
+    <div class="col-6">
+      <!-- R2.1: Add Options Button-->
+      <button mat-raised-button color="primary" type="button" name="button" (click)="onCreate()">+ Add Option</button>
+    </div>
+  </div>
+  <li class="col-12" *ngFor="let session of sessions; let i= index">
+    {{ sessions[i] }}
+    <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(i)">x</button>
+  </li>
+</div>
