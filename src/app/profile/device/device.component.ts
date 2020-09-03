@@ -26,6 +26,7 @@ export class DeviceComponent  implements OnInit{
   NumberofNotes: number;
   remove: boolean;
   opened: boolean;
+  DynamicallyCreatedKeys: any[]= [];
   //NoteNumber: number;
   //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
   constructor(){
@@ -89,6 +90,14 @@ createNewKey(data){
       ViewWhenLocked:"",
       incoming:[]
     }
+
+    this.DynamicallyCreatedKeys.push({
+      type: data.type,
+      key: data.nickname
+    });
+
+    console.log(this.DynamicallyCreatedKeys);
+
   }
 }
 
@@ -146,7 +155,8 @@ createNewKey(data){
 prepareToChangePage(pageCode: number){
   this.getAccountgraph.emit({
     changePageTo: pageCode,
-    accountgraph:this.accountgraph
+    accountgraph:this.accountgraph,
+    needToCreate: this.DynamicallyCreatedKeys
   });
 
   this.getDeviceKeys.emit(this.tabs);

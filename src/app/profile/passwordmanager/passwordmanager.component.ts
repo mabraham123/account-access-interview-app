@@ -25,6 +25,8 @@ exists: boolean;
 NumberofNotes: number;
 remove: boolean;
 opened: boolean;
+DynamicallyCreatedKeys: any[]= [];
+
 //NoteNumber: number;
 //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
 constructor(){
@@ -92,6 +94,15 @@ if(!(this.accountgraph.hasOwnProperty(potentialKey))){
     opensessions:[],
     incoming:[]
   }
+
+  this.DynamicallyCreatedKeys.push({
+    type: data.type,
+    key: data.nickname
+  });
+
+  console.log(this.DynamicallyCreatedKeys);
+
+
 }
 }
 
@@ -151,7 +162,8 @@ updateName(name1, index: number){
 prepareToChangePage(pageCode: number){
 this.getAccountgraph.emit({
   changePageTo: pageCode,
-  accountgraph:this.accountgraph
+  accountgraph:this.accountgraph,
+  needToCreate: this.DynamicallyCreatedKeys
 });
 
 this.getPasswordmanagerKeys.emit(this.tabs);
