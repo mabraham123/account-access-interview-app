@@ -19,6 +19,16 @@
       (getPasswordmanagerKeys)="getPasswordmanagerKeys($event)">
     </app-passwordmanager>
     </some-element>
+
+    <some-element *ngSwitchCase=2>
+      <!-- Load Password Manager Page -->
+      <app-email
+        [accountgraph]="accountgraph"
+        [tabs]="emailKeys"
+        (getAccountgraph)="getAccountgraph($event)"
+        (getEmailKeys)="getEmailKeys($event)">
+      </app-email>
+      </some-element>
     
   </container-element>
 

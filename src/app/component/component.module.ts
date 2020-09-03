@@ -7,6 +7,7 @@ import { OpensessionsComponent } from './opensessions/opensessions.component';
 
 
 
+
 @NgModule({
   declarations: [LoginMethodsComponent, ModalComponent, NotesComponent, OpensessionsComponent],
   entryComponents:[ModalComponent],

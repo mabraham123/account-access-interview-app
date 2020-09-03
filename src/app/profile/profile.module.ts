@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
 import { PasswordmanagerComponent } from './passwordmanager/passwordmanager.component';
+import { EmailComponent } from './email/email.component';
 
 
 import { LoginMethodsComponent } from '../component/login-methods/login-methods.component';
@@ -25,6 +26,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+
 const MaterialComponents=[
   MatButtonModule,
   MatGridListModule,
@@ -43,7 +45,7 @@ const MaterialComponents=[
 
 
 @NgModule({
-  declarations: [DeviceComponent, LoginMethodsComponent, ModalComponent, PasswordmanagerComponent,OpensessionsComponent],
+  declarations: [DeviceComponent,EmailComponent,PasswordmanagerComponent, LoginMethodsComponent, ModalComponent,OpensessionsComponent, ],
   entryComponents: [ModalComponent],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ const MaterialComponents=[
   ],
   exports:[
     DeviceComponent,
-    PasswordmanagerComponent
+    PasswordmanagerComponent,
+    EmailComponent
   ]
 })
 

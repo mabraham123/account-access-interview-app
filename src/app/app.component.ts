@@ -11,6 +11,7 @@ export class AppComponent {
   currentPage: number=0;
   devicesKeys: any[] = [];
   passwordmanagerKeys: any[] =[];
+  emailKeys: any[] =[];
   otherKeys: any[] =[];
 
   getAccountgraph(data){
@@ -21,7 +22,6 @@ export class AppComponent {
     console.log(data)
     for (let index = 0; index < data.needToCreate.length; index++) {
      this.updateKeysRegisters(data.needToCreate[index].type, data.needToCreate[index].key);
-      
     }
 
     this.currentPage=data.changePageTo;
@@ -34,6 +34,11 @@ export class AppComponent {
   }
 
   getPasswordmanagerKeys(data){
+    console.log("Password Manager Keys Saved");
+    this.passwordmanagerKeys=data;
+  }
+
+  getEmailKeys(data){
     console.log("Password Manager Keys Saved");
     this.passwordmanagerKeys=data;
   }
