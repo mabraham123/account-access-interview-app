@@ -25,6 +25,7 @@ export class DeviceComponent  implements OnInit{
   exists: boolean;
   NumberofNotes: number;
   remove: boolean;
+  opened: boolean;
   //NoteNumber: number;
   //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
   constructor(){
@@ -34,6 +35,7 @@ export class DeviceComponent  implements OnInit{
     this.exists=false;
     this.NumberofNotes=0;
     this.remove=false;
+    this.opened=false;
     //this.NoteNumber=0;
   }
 
@@ -141,14 +143,15 @@ createNewKey(data){
     }
 }
 
-prepareToChangePage(){
+prepareToChangePage(pageCode: number){
   this.getAccountgraph.emit({
-    changePageTo: 1,
+    changePageTo: pageCode,
     accountgraph:this.accountgraph
   });
 
   this.getDeviceKeys.emit(this.tabs);
 }
+
 
 
 //TODO- If there is time then fix the add note feature

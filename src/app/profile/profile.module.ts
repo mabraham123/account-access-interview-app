@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
 import { PasswordmanagerComponent } from './passwordmanager/passwordmanager.component';
 
@@ -22,6 +22,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const MaterialComponents=[
   MatButtonModule,
@@ -34,7 +36,9 @@ const MaterialComponents=[
   MatDialogModule,
   MatExpansionModule,
   MatRadioModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSidenavModule,
+  MatAutocompleteModule
 ];
 
 
@@ -44,6 +48,7 @@ const MaterialComponents=[
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialComponents
   ],
   exports:[

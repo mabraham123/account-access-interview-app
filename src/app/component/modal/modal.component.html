@@ -1,17 +1,26 @@
 <h1 mat-dialog-title>Add Item</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Nickname of item</mat-label>
-    <input matInput [(ngModel)]="input" placeholder="Nickname" required>
-  </mat-form-field>
+  <!-- <form> -->
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Item Type</mat-label>
+      <input matInput type="text" [(ngModel)]="type" [matAutocomplete]="auto"  placeholder="Type" [formControl]="myControl" required>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Item Type</mat-label>
-    <input matInput [(ngModel)]="type" placeholder="Type" required>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nickname of item</mat-label>
+      <input matInput type="text" [(ngModel)]="input" placeholder="Nickname" required>
+    </mat-form-field>
   <br>
+<!-- </form> -->
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="close()">Close</button>
   <button mat-button mat-dialog-close (click)="close()">Submit</button>
 </div>
+

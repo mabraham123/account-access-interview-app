@@ -24,6 +24,7 @@ nicknameSet: boolean;
 exists: boolean;
 NumberofNotes: number;
 remove: boolean;
+opened: boolean;
 //NoteNumber: number;
 //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
 constructor(){
@@ -33,6 +34,7 @@ constructor(){
   this.exists=false;
   this.NumberofNotes=0;
   this.remove=false;
+  this.opened=false;
   //this.NoteNumber=0;
 }
 
@@ -146,9 +148,9 @@ updateName(name1, index: number){
   }
 }
 
-prepareToChangePage(){
+prepareToChangePage(pageCode: number){
 this.getAccountgraph.emit({
-  changePageTo: 0,
+  changePageTo: pageCode,
   accountgraph:this.accountgraph
 });
 

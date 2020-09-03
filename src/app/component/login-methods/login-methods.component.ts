@@ -63,7 +63,7 @@ export class LoginMethodsComponent implements OnInit{
 
   CreateOption(){
     this.options.push({
-      name: "Option "+(this.options.length+1),
+     // name: "Option "+(this.options.length+1),
       recovery: false,
       needed: []
     });
@@ -84,9 +84,9 @@ export class LoginMethodsComponent implements OnInit{
 
     //Rename the rest of the options with the correct numbers
     //Start from index that was deleted and work up as the ones prevoius are correct
-    for (let counter = index; counter < this.options.length; counter++) {
-      this.options[counter].name= "Option "+(counter+1)
-    }
+    // for (let counter = index; counter < this.options.length; counter++) {
+    //   this.options[counter].name= "Option "+(counter+1)
+    // }
 
     //Send the final device object with parent array index to the replaced in the parent array of devices
     this.updateParentObjectArray();

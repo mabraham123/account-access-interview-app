@@ -1,3 +1,23 @@
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="push">
+    <h2><u><b>Account Graphs</b></u></h2>
+    <ol>
+      <li><button mat-button disabled><b>-Devices</b></button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(1)">Password Managers</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(2)">Emails</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(3)">Social Media</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(4)">Finance</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(5)">Shopping</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(6)">Place of Work</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(7)">Education</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(8)">Other</button></li>
+      <li><button mat-button color="primary" (click)="prepareToChangePage(9)">Passwords Summary</button></li>
+    </ol>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+  <button mat-raised-button class="sidebarBtn" (click)="opened=!opened">></button>  
+  
   <div class="container">
   <h1><b>{{profileTitle}}</b></h1>
   <h3>{{profileSlogan}}</h3>
@@ -88,8 +108,9 @@
     <div class="col-2"><p *ngIf="NumberofNotes>0">Notes: {{NumberofNotes}}</p></div>
     <div class="col-2">
       <!-- R5: Next Option Section -->
-      <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage()" > Next Section  ></button>
+      <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(1)" > Next Section  ></button>
     </div>
   </div>
 </div>
-
+</mat-sidenav-content>
+</mat-sidenav-container>

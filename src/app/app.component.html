@@ -1,23 +1,28 @@
 <div class="container">
-
-  <div *ngIf="currentPage===0">
+  <container-element [ngSwitch]="currentPage">
+    <some-element *ngSwitchCase=0>
+    <!-- Load Devices Page -->
     <app-device
-    [accountgraph]="accountgraph"
-    [tabs]="devicesKeys"
-    (getAccountgraph)="getAccountgraph($event)"
-    (getDeviceKeys)="getDeviceKeys($event)"
-    >
+      [accountgraph]="accountgraph"
+      [tabs]="devicesKeys"
+      (getAccountgraph)="getAccountgraph($event)"
+      (getDeviceKeys)="getDeviceKeys($event)">
     </app-device>
-  </div>
-  <div *ngIf="currentPage===1">
+    </some-element>
+
+    <some-element *ngSwitchCase=1>
+    <!-- Load Password Manager Page -->
     <app-passwordmanager
-    [accountgraph]="accountgraph"
-    [tabs]="passwordmanagerKeys"
-    (getAccountgraph)="getAccountgraph($event)"
-    (getPasswordmanagerKeys)="getPasswordmanagerKeys($event)"
-    >
+      [accountgraph]="accountgraph"
+      [tabs]="passwordmanagerKeys"
+      (getAccountgraph)="getAccountgraph($event)"
+      (getPasswordmanagerKeys)="getPasswordmanagerKeys($event)">
     </app-passwordmanager>
-  </div>
+    </some-element>
+    
+  </container-element>
+
+
 </div>
 
 

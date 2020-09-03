@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-  box-sizing: border-box;
-}
+// *{
+//   box-sizing: border-box;
+// }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -31,32 +31,47 @@ hr {
   margin: 0;
 }
 
-
-/**START Grid system scss**/
-.container{
-  width: calc(100% - 2em);
-  max-width: 60em;
-  margin: 2% auto;
+.sidebarBtn{
+  background-color:lightgrey;
 }
 
-
-
-
-
-.row{
-  display: flex;
-  flex-wrap: wrap;
+mat-sidenav-container{
+  height: 100vh;
+/**END Grid system scss**/
+mat-sidenav, mat-sidenav-content{
+  padding:16px;
 }
-$columns: 12;
 
-@for $i from 1 through $columns{
-  .col-#{$i}{
-    flex: 0 0 100% / $columns * $i;
+mat-sidenav{
+  height: auto;
+}
+
+  /**START Grid system scss**/
+  .container{
+    width: calc(100% - 2em);
+    max-width: 60em;
+    margin: 2% auto;
   }
-  .col-offset-#{$i}{
-    margin-left: 100% / $columns * $i;
+
+  .row{
+    display: flex;
+    flex-wrap: wrap;
   }
+  $columns: 12;
+
+  @for $i from 1 through $columns{
+    .col-#{$i}{
+      flex: 0 0 100% / $columns * $i;
+    }
+    .col-offset-#{$i}{
+      margin-left: 100% / $columns * $i;
+    }
+  }
+
+
+  
+  
+
 }
 
 
- /**END Grid system scss**/
