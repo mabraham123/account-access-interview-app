@@ -12,6 +12,7 @@ export class AppComponent {
   devicesKeys: any[] = [];
   passwordmanagerKeys: any[] =[];
   emailKeys: any[] =[];
+  passwordKeys: any[] =[];
   otherKeys: any[] =[];
 
   getAccountgraph(data){
@@ -40,8 +41,14 @@ export class AppComponent {
 
   getEmailKeys(data){
     console.log("Password Manager Keys Saved");
+    this.emailKeys=data;
+  }
+
+  getPasswordKeys(data){
+    console.log("Password Manager Keys Saved");
     this.passwordmanagerKeys=data;
   }
+
 
 
   updateKeysRegisters(type: string, name: string): void{
@@ -56,6 +63,14 @@ export class AppComponent {
          this.passwordmanagerKeys.push(keyToAdd);
          break; 
       }
+      case "Email": { 
+        this.emailKeys.push(keyToAdd);
+        break; 
+     }
+     case "Password": { 
+      this.passwordKeys.push(keyToAdd);
+      break; 
+   }
       default: { 
          //Add to the other list 
          this.otherKeys.push(keyToAdd);

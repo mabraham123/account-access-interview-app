@@ -29,6 +29,16 @@
         (getEmailKeys)="getEmailKeys($event)">
       </app-email>
       </some-element>
+
+      <some-element *ngSwitchCase=9>
+        <!-- Load Password Manager Page -->
+        <app-password
+          [accountgraph]="accountgraph"
+          [tabs]="passwordKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getPasswordKeys)="getPasswordKeys($event)">
+        </app-password>
+        </some-element>
     
   </container-element>
 

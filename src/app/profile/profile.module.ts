@@ -25,6 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PasswordComponent } from './password/password.component';
 
 
 const MaterialComponents=[
@@ -43,9 +44,16 @@ const MaterialComponents=[
   MatAutocompleteModule
 ];
 
+const Pages=[
+  DeviceComponent,
+  PasswordmanagerComponent,
+  EmailComponent,
+  PasswordComponent
+];
+
 
 @NgModule({
-  declarations: [DeviceComponent,EmailComponent,PasswordmanagerComponent, LoginMethodsComponent, ModalComponent,OpensessionsComponent, ],
+  declarations: [Pages, LoginMethodsComponent, ModalComponent,OpensessionsComponent ],
   entryComponents: [ModalComponent],
   imports: [
     CommonModule,
@@ -54,9 +62,7 @@ const MaterialComponents=[
     MaterialComponents
   ],
   exports:[
-    DeviceComponent,
-    PasswordmanagerComponent,
-    EmailComponent
+    Pages
   ]
 })
 
