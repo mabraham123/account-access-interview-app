@@ -4,12 +4,21 @@ import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
 import { PasswordmanagerComponent } from './passwordmanager/passwordmanager.component';
 import { EmailComponent } from './email/email.component';
+import { PasswordComponent } from './password/password.component';
+
 
 
 import { LoginMethodsComponent } from '../component/login-methods/login-methods.component';
 import { ModalComponent } from '../component/modal/modal.component';
 import { OpensessionsComponent } from '../component/opensessions/opensessions.component';
 // import { NotesComponent } from '../component/notes/notes.component';
+
+const Pages=[
+  DeviceComponent,
+  PasswordmanagerComponent,
+  EmailComponent,
+  PasswordComponent
+];
 
 
 import { MatButtonModule } from '@angular/material/button';
@@ -25,8 +34,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { PasswordComponent } from './password/password.component';
-
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 const MaterialComponents=[
   MatButtonModule,
@@ -41,15 +50,12 @@ const MaterialComponents=[
   MatRadioModule,
   MatTooltipModule,
   MatSidenavModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatCardModule,
+  MatSelectModule
 ];
 
-const Pages=[
-  DeviceComponent,
-  PasswordmanagerComponent,
-  EmailComponent,
-  PasswordComponent
-];
+
 
 
 @NgModule({

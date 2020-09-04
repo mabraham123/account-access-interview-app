@@ -35,6 +35,14 @@ hr {
   background-color:lightgrey;
 }
 
+.questionbox{
+  width: 50%;
+}
+
+mat-radio-button {
+  margin-left: 16px;
+}
+
 mat-sidenav-container{
   height: 100vh;
 /**END Grid system scss**/

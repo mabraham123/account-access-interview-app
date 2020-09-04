@@ -9,9 +9,9 @@ export class PasswordComponent implements OnInit {
 
   
   @Input() accountgraph;
-  @Input() tabs
-  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
-  @Output() getPasswordKeys: EventEmitter<any>= new EventEmitter()
+  @Input() tabs;
+  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter();
+  @Output() getPasswordKeys: EventEmitter<any>= new EventEmitter();
 
   profileTitle: string= 'Password Summary';
   profileSlogan: string= 'Look over the passwords you mentioned, we need just a little more information';
@@ -28,6 +28,10 @@ NumberofNotes: number;
 remove: boolean;
 opened: boolean;
 DynamicallyCreatedKeys: any[]= [];
+tip: string;
+strengthpickedWeak: boolean;
+strengthpickedAvg: boolean;
+strengthpickedStrong: boolean;
 
 //NoteNumber: number;
 //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
@@ -39,6 +43,10 @@ constructor(){
   this.NumberofNotes=0;
   this.remove=false;
   this.opened=false;
+  this.tip="Certain to remain safe and uncompramised";
+  this.strengthpickedWeak=false;
+  this.strengthpickedAvg=false;
+  this.strengthpickedStrong=false;
   //this.NoteNumber=0;
 }
 
@@ -160,6 +168,41 @@ updateName(name1, index: number){
     alert("Error: Look like you have already used that one, try another nickname");
   }
 }
+
+
+
+setPasswordStrength(index: number, strengthLevel: string){
+  this.accountgraph[this.tabs[index]].strength=strengthLevel;
+
+  switch(strengthLevel) { 
+    case 'weak': { 
+      this.strengthpickedWeak=true;
+      this.strengthpickedAvg=false;
+      this.strengthpickedStrong=false;
+       break; 
+    } 
+    case 'average': { 
+      this.strengthpickedWeak=false;
+      this.strengthpickedAvg=true;
+      this.strengthpickedStrong=false;
+       break; 
+    } 
+    case 'strong': { 
+      this.strengthpickedWeak=false;
+      this.strengthpickedAvg=false;
+      this.strengthpickedStrong=true;
+      break; 
+   } 
+   default: { 
+    this.strengthpickedWeak=false;
+    this.strengthpickedAvg=false;
+    this.strengthpickedStrong=false;
+    break; 
+ } 
+ } 
+
+}
+
 
 prepareToChangePage(pageCode: number){
 this.getAccountgraph.emit({
