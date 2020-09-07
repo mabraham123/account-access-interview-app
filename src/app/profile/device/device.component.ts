@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
 
 export class DeviceComponent  implements OnInit{
     @Input() accountgraph;
-    @Input() tabs
+    @Input() tabs;
     @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
     @Output() getDeviceKeys: EventEmitter<any>= new EventEmitter()
 
@@ -162,6 +162,7 @@ prepareToChangePage(pageCode: number){
   this.getDeviceKeys.emit(this.tabs);
 }
 
+//Add note as a field of the object
 
 
 //TODO- If there is time then fix the add note feature

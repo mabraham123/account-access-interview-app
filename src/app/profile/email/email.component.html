@@ -59,6 +59,7 @@
         <app-login-methods
         [key]="tabs[index]"
         [OriginalIncoming]="accountgraph[tabs[index]].incoming"
+        [accountgraph]="accountgraph"
         (updateObject)="updateObject($event)"
         (createNewKey)="createNewKey($event)"
         ></app-login-methods>

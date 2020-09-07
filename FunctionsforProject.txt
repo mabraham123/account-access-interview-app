@@ -1,0 +1,27 @@
+findInHashtable(feild: string, tofind: string): string[]{
+var found: string[]=[];
+
+//Itterate through the hashtable
+for(v in accountgraph){
+//Check the type of the entry
+ if(accountgraph[v][field]==tofind){ 
+    //Add to array of device keys
+    found.push(v);
+  }
+}
+
+
+return found
+}
+
+
+updateTypeArray(){
+//Itterate throught hashtable
+ for(v in accountgraph){
+  //Check if type is in the type array
+  if((this.typeOption.indexOf(accountgraph[v].type))<0){
+   //If it is not in the array add it
+   this.typeOption.push(accountgraph[v].type);
+  }
+ }
+}

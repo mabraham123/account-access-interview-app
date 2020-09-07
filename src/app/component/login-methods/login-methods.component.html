@@ -29,7 +29,8 @@
         <ul>
           <br>
         <li class="col-12 decoration" *ngFor="let item of options[index].needed; let i= index">
-          {{ options[index].needed[i] }}
+          <!-- {{ options[index].needed[i] }} -->
+          {{ accountgraph[options[index].needed[i]].type+"- "+accountgraph[options[index].needed[i]].name }}
           <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(index, i)">x</button>
         </li>
         <br>

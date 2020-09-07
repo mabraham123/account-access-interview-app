@@ -162,12 +162,29 @@ updateName(name1, index: number){
     this.tabs[index]=potentialKey;
     this.nicknameSet=true;
 
+    // let idx:number=0;
+
+    // for(let v in this.accountgraph){
+    //   for(let k in this.accountgraph[v].incoming){
+    //     for(let y in this.accountgraph[v].incoming[k].needed){
+    //       idx= this.accountgraph[v].incoming[k].needed[y].indexOf(oldKey);
+
+    //       if(idx>-1){
+    //         this.accountgraph[v].incoming[k].needed[idx]=potentialKey;
+    //       }
+    //     }
+    //   }
+    // }
     console.log(this.accountgraph);
     console.log(this.tabs);
   }else{
     alert("Error: Look like you have already used that one, try another nickname");
   }
 }
+
+// updateName(name1, index: number){
+//   this.accountgraph[this.tabs[index]].name=name1.newname;
+// }
 
 
 

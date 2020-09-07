@@ -46,7 +46,7 @@ export class AppComponent {
 
   getPasswordKeys(data){
     console.log("Password Manager Keys Saved");
-    this.passwordmanagerKeys=data;
+    this.passwordKeys=data;
   }
 
 

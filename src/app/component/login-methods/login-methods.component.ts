@@ -15,6 +15,7 @@ export class LoginMethodsComponent implements OnInit{
 
   @Input() key;
   @Input() OriginalIncoming;
+  @Input() accountgraph;
 
   private dialogRef: MatDialogRef<ModalComponent>
 
