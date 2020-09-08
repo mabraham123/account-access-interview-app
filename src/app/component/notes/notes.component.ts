@@ -6,36 +6,33 @@ import { Component, OnInit ,ElementRef ,Input ,Output, EventEmitter} from '@angu
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  @Input() token;
+   @Input() key;
+   @Input() current;
+   @Output() updateNote: EventEmitter<any>= new EventEmitter()
 
-  @Output() updateNote: EventEmitter<any>= new EventEmitter()
-  noteNumber: number;
   
   input: string="";
 
   constructor(private host: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
+    this.input=this.current;
   }
 
   saveNote(text: string){
+    alert("Note saved");
     this.updateNote.emit({
-      save: true,
-      token: this.token,
+      key: this.key,
       info: text
     });
   }
 
   deleteNote(){
+    alert("Note deleted");
     this.updateNote.emit({
-      save: false,
-      token: this.token
+      key: this.key,
+      info:""
     });
   }
-
-
-  // deleteNote(){
-  //   this.host.nativeElement.remove();
-  // }
 
 }

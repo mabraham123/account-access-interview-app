@@ -220,4 +220,10 @@ this.getAccountgraph.emit({
 this.getEmailKeys.emit(this.tabs);
 }
 
+//Add note as a field of the object
+updateNote(data){
+  this.accountgraph[data.key].note=data.info;
+}
+
+
 }

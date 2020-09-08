@@ -11,7 +11,7 @@ import { PasswordComponent } from './password/password.component';
 import { LoginMethodsComponent } from '../component/login-methods/login-methods.component';
 import { ModalComponent } from '../component/modal/modal.component';
 import { OpensessionsComponent } from '../component/opensessions/opensessions.component';
-// import { NotesComponent } from '../component/notes/notes.component';
+import { NotesComponent } from '../component/notes/notes.component';
 
 const Pages=[
   DeviceComponent,
@@ -59,7 +59,7 @@ const MaterialComponents=[
 
 
 @NgModule({
-  declarations: [Pages, LoginMethodsComponent, ModalComponent,OpensessionsComponent ],
+  declarations: [Pages, LoginMethodsComponent, ModalComponent,OpensessionsComponent,NotesComponent ],
   entryComponents: [ModalComponent],
   imports: [
     CommonModule,

@@ -267,4 +267,10 @@ this.getAccountgraph.emit({
 this.getPasswordKeys.emit(this.tabs);
 }
 
+//Add note as a field of the object
+updateNote(data){
+  this.accountgraph[data.key].note=data.info;
+}
+
+
 }

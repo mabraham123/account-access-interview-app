@@ -213,52 +213,9 @@ prepareToChangePage(pageCode: number){
 }
 
 //Add note as a field of the object
-
-
-//TODO- If there is time then fix the add note feature
-// Issue: currently no way of assigning a unquie token to a note
-  // updateNote(data){
-  //   console.log("asdkjashdlkasd");
-  //   let potentialKey=this.profileType+": Note"+data.token;
-  //   if(data.save){
-  //     //save Note
-      
-  //     if(this.accountgraph.hasOwnProperty(potentialKey)){
-  //       //Aready exists
-  //       this.accountgraph[potentialKey].note=data.info
-  //     }else{
-  //       //Does not exist- create note
-  //       this.accountgraph[potentialKey]={
-  //         name: "Note"+data.token,
-  //         note: data.info
-  //       }
-  //     }
-  //   }else{
-  //     console.log(data.token);
-  //     //delete Note from notes array
-  //     this.notes.splice(data.token,1);
-  //     //delete note from hashtable
-  //     delete this.accountgraph[potentialKey];
-      
-  //   }
-  //   console.log(this.notes);
-  //     console.log(this.accountgraph);
-
-  // }
-
-  // addNote(){
-  //   this.notes[this.NoteNumber]="Note"
-  //   //this.notes.push("note");
-  //   this.NoteNumber++;
-  // }
-
-  //  async addNote(){
-  //   this.NumberofNotes++;
-  //   const {NotesComponent} = await import('../../component/notes/notes.component');
-  //   const notesComponentFactory= this.resolver.resolveComponentFactory(NotesComponent)
-  //   const notesComponentRef=this.cvRef.createComponent(notesComponentFactory);
-  //   notesComponentRef.instance.noteNumber=this.NumberofNotes;
-  // }
+  updateNote(data){
+    this.accountgraph[data.key].note=data.info;
+  }
 
 
 }
