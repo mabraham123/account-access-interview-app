@@ -103,7 +103,9 @@ export class LoginMethodsComponent implements OnInit{
   }
 
   onCreate(index: number){
-    this.dialogRef = this.dialog.open(ModalComponent);
+    this.dialogRef = this.dialog.open(ModalComponent,{
+      data:{accountgraph:this.accountgraph}
+    });
 
     this.dialogRef.afterClosed().subscribe(result => {
       //Check if not empty

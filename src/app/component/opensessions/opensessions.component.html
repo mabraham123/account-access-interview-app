@@ -13,7 +13,13 @@
     </div>
   </div>
   <li class="col-12" *ngFor="let session of sessions; let i= index">
-    {{ sessions[i] }}
+    <ng-template [ngIf]="accountgraph.hasOwnProperty(sessions[i])">
+      {{ accountgraph[sessions[i]].type+"- "+accountgraph[sessions[i]].name }}
+      <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(index, i)">x</button>
+      </ng-template>
+
+    <!-- {{ sessions[i] }} -->
+    <!-- {{ accountgraph[sessions[i]].type+"- "+accountgraph[sessions[i]].name }} -->
     <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(i)">x</button>
   </li>
 </div>

@@ -8,8 +8,8 @@
         <li><button mat-button color="primary" (click)="prepareToChangePage(3)">Social Media</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(4)">Finance</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(5)">Shopping</button></li>
-        <li><button mat-button color="primary" (click)="prepareToChangePage(6)">Place of Work</button></li>
-        <li><button mat-button color="primary" (click)="prepareToChangePage(7)">Education</button></li>
+        <li><button mat-button color="primary" (click)="prepareToChangePage(6)">Entertainment</button></li>
+        <li><button mat-button color="primary" (click)="prepareToChangePage(7)">Gaming</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(8)">Other</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(9)">Passwords Summary</button></li>
       </ol>
@@ -72,6 +72,7 @@
         <app-opensessions
         [key]="tabs[index]"
         [OriginalOpenSessions]="accountgraph[tabs[index]].opensessions"
+        [accountgraph]="accountgraph"
         (updateObjectOpenSessions)="updateObjectOpenSessions($event)"
         (createNewKey)="createNewKey($event)"
         ></app-opensessions>

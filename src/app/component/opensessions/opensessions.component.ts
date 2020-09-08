@@ -15,6 +15,7 @@ export class OpensessionsComponent implements OnInit {
 
  @Input() key;
  @Input() OriginalOpenSessions;
+ @Input() accountgraph;
  @Output() updateObjectOpenSessions: EventEmitter<any>= new EventEmitter()
  @Output() createNewKey: EventEmitter<any>= new EventEmitter()
 
@@ -56,7 +57,9 @@ sessions: any[] = [];
 
 
   onCreate(){
-    this.dialogRef = this.dialog.open(ModalComponent);
+    this.dialogRef = this.dialog.open(ModalComponent,{
+      data:{accountgraph:this.accountgraph}
+    });
 
     this.dialogRef.afterClosed().subscribe(result => {
       //Check if not empty

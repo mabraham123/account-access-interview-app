@@ -118,6 +118,30 @@ removeTab(index: number) {
 
   delete this.accountgraph[this.tabs[index]];
 
+  let idx:number=0;
+
+      for(let v in this.accountgraph){
+        for(let k in this.accountgraph[v].incoming){
+          for(let y in this.accountgraph[v].incoming[k].needed){
+            idx= this.accountgraph[v].incoming[k].needed[y].indexOf(this.tabs[index]);
+
+            if(idx>-1){
+              this.accountgraph[v].incoming[k].needed.splice(idx, 1);
+            }
+          }
+        }
+      }
+
+      for(let a in this.accountgraph){
+        for(let b in this.accountgraph[a].opensessions){
+          idx=this.accountgraph[a].opensessions[b].indexOf(this.tabs[index]);
+
+          if(idx>-1){
+            this.accountgraph[a].opensessions.splice(idx, 1);
+          }
+        }
+      }
+
   this.tabs.splice(index, 1);
 
   console.log(this.tabs);
@@ -151,6 +175,31 @@ updateName(name1, index: number){
     //Swap in array
     this.tabs[index]=potentialKey;
     this.nicknameSet=true;
+
+    let idx:number=0;
+
+    for(let v in this.accountgraph){
+      for(let k in this.accountgraph[v].incoming){
+        for(let y in this.accountgraph[v].incoming[k].needed){
+          idx= this.accountgraph[v].incoming[k].needed[y].indexOf(oldKey);
+
+          if(idx>-1){
+            this.accountgraph[v].incoming[k].needed[idx]=potentialKey;
+          }
+        }
+      }
+    }
+
+    for(let a in this.accountgraph){
+      for(let b in this.accountgraph[a].opensessions){
+        idx=this.accountgraph[a].opensessions[b].indexOf(oldKey);
+
+        if(idx>-1){
+          this.accountgraph[a].opensessions[b]=potentialKey;
+        }
+      }
+    }
+
 
     console.log(this.accountgraph);
     console.log(this.tabs);
