@@ -3,12 +3,12 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h2><b>Summary:</b></h2>
-      <p>Login methods and things you need to access this account</p>
+      <h2><b>Login Methods:</b></h2>
+      <p>What are the login methods and things you need to access this account?</p>
     </div>
     <div class="col-6">
       <!-- R2.1: Add Options Button-->
-      <button mat-raised-button color="primary" type="button" name="button" (click)="CreateOption()">+ Add Option</button>
+      <button mat-raised-button color="primary" type="button" name="button" (click)="CreateOption()">+ Add Method</button>
     </div>
   </div>
   <mat-divider></mat-divider>
@@ -19,7 +19,7 @@
         <div class="col-12">
           <!-- R2.2.1: Remove login Method button-->
           <button class="extra" mat-button color="warn" (click)="removeTab(index)">X</button>
-          <b class="title">Option {{ index+1 }}</b>
+          <b class="title">Method {{ index+1 }}</b>
           <!-- R2.2.2: Add login Method button-->
           <!-- R2.2.2.1: Add login method modal-->
         <button class="extra" mat-flat-button color="primary" (click)="onCreate(index)">+ Add</button>
@@ -34,7 +34,7 @@
           <button class="extra2" mat-mini-fab color="warn" (click)="removeLoginItemNeeded(index, i)">x</button>
           </ng-template>
           <!-- {{ options[index].needed[i] }} -->
-          
+
         </li>
         <br>
         </ul>
