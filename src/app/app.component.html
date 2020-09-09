@@ -1,4 +1,12 @@
 <div class="container">
+  <div *ngIf="!off">
+    <button mat-flat-button color="primary" (click)="uploaded=true; off=true">Upload File</button>
+  </div>
+  
+  <div *ngIf="uploaded">
+    <input type="file" (change)="onFileSelected($event)">
+  </div>
+  
   <container-element [ngSwitch]="currentPage">
     <some-element *ngSwitchCase=0>
     <!-- Load Devices Page -->

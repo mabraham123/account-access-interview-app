@@ -1,0 +1,29 @@
+{
+"Device: iphone1": {"name":"iphone",
+                    "type":"Device",
+                    "viewWhenLocked":"",
+                    "incoming":[
+                      {"recovery": false,
+                        "needed":[]
+                      }
+                    ]
+                  },
+"Other: box": {"name":"box",
+                    "type":"Other",
+                    "viewWhenLocked":"",
+                    "incoming":[
+                      {"recovery": false,
+                        "needed":[]
+                      }
+                    ]
+                  },
+"Card: credit": {"name":"credit",
+                    "type":"Card",
+                    "viewWhenLocked":"",
+                    "incoming":[
+                      {"recovery": false,
+                        "needed":[]
+                      }
+                    ]
+                  }
+}

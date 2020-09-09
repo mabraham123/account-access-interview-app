@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'account-access-interview-app';
   accountgraph={};
   currentPage: number=0;
@@ -19,6 +19,9 @@ export class AppComponent {
   entertainmentKeys: any[] = [];
   gamingKeys: any[] = [];
   otherKeys: any[] =[];
+  uploaded:boolean= false;
+  off:boolean=false;
+
 
   getAccountgraph(data){
     console.log("Main hashtable updated");
@@ -139,5 +142,77 @@ export class AppComponent {
    } 
 
   }
+
+  onFileSelected(event){
+    let abc;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.onload = (event) => {
+      this.accountgraph=JSON.parse(event.target.result as string);
+      this.loadItems();
+      this.uploaded=false;
+    }
+    reader.readAsText(file);
+
+    
+  }
+
+  loadItems(){
+    this.devicesKeys=this.findInHashtable("type","Device");
+    this.passwordmanagerKeys=this.findInHashtable("type","Password Mananger");
+    this.emailKeys=this.findInHashtable("type","Email");
+    this.socialmediaKeys=this.findInHashtable("type","Social Media");
+    this.financeKeys=this.findInHashtable("type","Finance");
+    this.shoppingKeys=this.findInHashtable("type","Shopping");
+    this.entertainmentKeys=this.findInHashtable("type","Entertainment");
+    this.gamingKeys=this.findInHashtable("type","Gaming");
+    this.otherKeys=this.findInHashtable("type","Other");
+    this.otherKeys=this.otherKeys.concat(this.findInOthersInHashtable());
+    this.passwordKeys=this.findInHashtable("type","Password");
+    console.log(this.otherKeys);
+  }
+
+
+  findInHashtable(feild: string, tofind: string): string[]{
+    var found: string[]=[];
+    
+    //Itterate through the hashtable
+    for(let v in this.accountgraph){
+    //Check the type of the entry
+     if(this.accountgraph[v][feild]==tofind){ 
+        //Add to array of device keys
+        found.push(v);
+      }
+    }
+
+    return found
+    }
+
+    findInOthersInHashtable(): string[]{
+      var found: string[]=[];
+      
+      //Itterate through the hashtable
+      for(let v in this.accountgraph){
+      //Check the type of the entry
+       if(this.accountgraph[v].type!=="Device"&& 
+       this.accountgraph[v].type!=="Password Manager"&& 
+       this.accountgraph[v].type!=="Email"&& 
+       this.accountgraph[v].type!=="Social Media"&& 
+       this.accountgraph[v].type!=="Finance"&& 
+       this.accountgraph[v].type!=="Shopping"&& 
+       this.accountgraph[v].type!=="Entertainment"&& 
+       this.accountgraph[v].type!=="Gaming"&& 
+       this.accountgraph[v].type!=="Other"&& 
+       this.accountgraph[v].type!=="Password"
+       ){ 
+          //Add to array of device keys
+          found.push(v);
+        }
+      }
+      
+      return found
+      }
+
+
 
 }
