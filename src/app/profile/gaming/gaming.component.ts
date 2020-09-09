@@ -1,19 +1,20 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-passwordmanager',
-  templateUrl: './passwordmanager.component.html',
-  styleUrls: ['./passwordmanager.component.scss']
+  selector: 'app-gaming',
+  templateUrl: './gaming.component.html',
+  styleUrls: ['./gaming.component.scss']
 })
-export class PasswordmanagerComponent implements OnInit {
-  @Input() accountgraph;
-  @Input() tabs
-  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
-  @Output() getPasswordmanagerKeys: EventEmitter<any>= new EventEmitter()
+export class GamingComponent implements OnInit {
 
-  profileTitle: string= 'Password Managers';
-  profileSlogan: string= 'Do you use password managers to access any of your accounts? '
-  profileType: string= 'Password Manager'
+  @Input() accountgraph;
+  @Input() tabs;
+  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
+  @Output() getGamingKeys: EventEmitter<any>= new EventEmitter()
+
+  profileTitle: string= 'Gaming';
+  profileSlogan: string= 'What accounts do you have linked to gaming accounts? '
+  profileType: string= 'Gaming'
 
 
 //tabs: any[] = [];
@@ -215,7 +216,7 @@ this.getAccountgraph.emit({
   needToCreate: this.DynamicallyCreatedKeys
 });
 
-this.getPasswordmanagerKeys.emit(this.tabs);
+this.getGamingKeys.emit(this.tabs);
 }
 
 //Add note as a field of the object

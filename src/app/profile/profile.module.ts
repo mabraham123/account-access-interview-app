@@ -4,6 +4,12 @@ import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DeviceComponent } from './device/device.component';
 import { PasswordmanagerComponent } from './passwordmanager/passwordmanager.component';
 import { EmailComponent } from './email/email.component';
+import { SocialmediaComponent } from './socialmedia/socialmedia.component';
+import { FinanceComponent } from './finance/finance.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { EntertainmentComponent } from './entertainment/entertainment.component';
+import { GamingComponent } from './gaming/gaming.component';
+import { OtherComponent } from './other/other.component';
 import { PasswordComponent } from './password/password.component';
 
 
@@ -17,6 +23,12 @@ const Pages=[
   DeviceComponent,
   PasswordmanagerComponent,
   EmailComponent,
+  SocialmediaComponent,
+  FinanceComponent,
+  ShoppingComponent,
+  EntertainmentComponent,
+  GamingComponent,
+  OtherComponent,
   PasswordComponent
 ];
 
@@ -36,6 +48,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+
+
+
+
+
+
 
 const MaterialComponents=[
   MatButtonModule,
@@ -59,7 +77,7 @@ const MaterialComponents=[
 
 
 @NgModule({
-  declarations: [Pages, LoginMethodsComponent, ModalComponent,OpensessionsComponent,NotesComponent ],
+  declarations: [Pages, LoginMethodsComponent, ModalComponent,OpensessionsComponent,NotesComponent],
   entryComponents: [ModalComponent],
   imports: [
     CommonModule,

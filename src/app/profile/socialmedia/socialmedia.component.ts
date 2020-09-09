@@ -1,19 +1,20 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
-@Component({
-  selector: 'app-passwordmanager',
-  templateUrl: './passwordmanager.component.html',
-  styleUrls: ['./passwordmanager.component.scss']
-})
-export class PasswordmanagerComponent implements OnInit {
-  @Input() accountgraph;
-  @Input() tabs
-  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
-  @Output() getPasswordmanagerKeys: EventEmitter<any>= new EventEmitter()
 
-  profileTitle: string= 'Password Managers';
-  profileSlogan: string= 'Do you use password managers to access any of your accounts? '
-  profileType: string= 'Password Manager'
+@Component({
+  selector: 'app-socialmedia',
+  templateUrl: './socialmedia.component.html',
+  styleUrls: ['./socialmedia.component.scss']
+})
+export class SocialmediaComponent implements OnInit {
+  @Input() accountgraph;
+  @Input() tabs;
+  @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
+  @Output() getSocialMediaKeys: EventEmitter<any>= new EventEmitter()
+
+  profileTitle: string= 'Social Media';
+  profileSlogan: string= 'How do you stay connected '
+  profileType: string= 'Social Media'
 
 
 //tabs: any[] = [];
@@ -215,7 +216,7 @@ this.getAccountgraph.emit({
   needToCreate: this.DynamicallyCreatedKeys
 });
 
-this.getPasswordmanagerKeys.emit(this.tabs);
+this.getSocialMediaKeys.emit(this.tabs);
 }
 
 //Add note as a field of the object
@@ -227,5 +228,4 @@ updateNote(data){
 scroll(el: HTMLElement) {
   el.scrollIntoView({behavior: 'smooth'});
 }
-
 }

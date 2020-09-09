@@ -272,5 +272,8 @@ updateNote(data){
   this.accountgraph[data.key].note=data.info;
 }
 
+scroll(el: HTMLElement) {
+  el.scrollIntoView({behavior: 'smooth'});
+}
 
 }

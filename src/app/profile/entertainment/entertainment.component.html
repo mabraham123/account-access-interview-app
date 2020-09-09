@@ -6,15 +6,17 @@
         <li><button mat-button color="primary" (click)="prepareToChangePage(1)">Password Managers</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(2)">Emails</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(3)">Social Media</button></li>
-        <li><button mat-button color="primary" (click)="prepareToChangePage(4)">Finance</button></li>
+        <li><button mat-button color="primary" (click)="prepareToChangePage(4)">Finances</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(5)">Shopping</button></li>
-        <li><button mat-button color="primary" (click)="prepareToChangePage(6)">Entertainment</button></li>
+        <li><button mat-button disabled><b>-Entertainment</b></button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(7)">Gaming</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(8)">Other</button></li>
-        <li><button mat-button disabled><b>-Passwords Summary</b></button></li>
+        <li><button mat-button color="primary" (click)="prepareToChangePage(9)">Passwords Summary</button></li>
       </ol>
+      
+      
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content >
   
     <button mat-flat-button class="sidebarBtn" (click)="opened=!opened" aria-label="Open the side menu">☰</button>
   <div class="container" #target>
@@ -55,60 +57,6 @@
         </div>
       <!--END Nickname-->
         <mat-divider></mat-divider>
-
-      <!--START Strength of Password Section-->
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <!--Ask user what strength their password is-->
-            <h2><b>Password Strength:</b></h2>
-            <!--Display Strength Options-->
-            <p>How <span class="hovertip"><b><u matTooltip="{{tip}}">secure</u></b></span> do you think your password is?</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4">
-            <!--Strong-->
-            <mat-card [ngClass]="this.accountgraph[this.tabs[index]].strength=='strong' ? 'chosen': ''">
-              <mat-card-header>
-                <mat-card-title>Strong</mat-card-title>
-                <mat-card-subtitle>A password you made yourself that you consider strong.</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="setPasswordStrength(index,'strong')">Strong</button>
-              </mat-card-actions>
-            </mat-card>
-            </div>
-            <div class="col-4">
-              <!--Average-->
-              <mat-card [ngClass]="this.accountgraph[this.tabs[index]].strength=='average' ? 'chosen': ''"> 
-                <mat-card-header>
-                  <mat-card-title>Average</mat-card-title>
-                  <mat-card-subtitle>A password you made yourself that you consider strong.</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                  <button mat-raised-button color="primary" (click)="setPasswordStrength(index,'average')">Average</button>
-                </mat-card-actions>
-              </mat-card>
-            </div>
-            <div class="col-4">
-              <!--Weak-->
-              <mat-card [ngClass]="this.accountgraph[this.tabs[index]].strength=='weak' ? 'chosen': ''">
-                <mat-card-header>
-                  <mat-card-title>Weak</mat-card-title>
-                  <mat-card-subtitle>A password you made yourself that you consider strong.</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                  <button mat-raised-button color="primary" (click)="setPasswordStrength(index,'weak')">Weak</button>
-                </mat-card-actions>
-              </mat-card>
-            </div>
-       
-        </div>
-      </div>
-      <br>
-      <mat-divider></mat-divider>
-      <!--END Strength of Password Section-->
         <!--START Login Methods Section-->
         <app-login-methods
         [key]="tabs[index]"
@@ -120,7 +68,18 @@
     
         <!-- END Login Methods Section-->
     
-      <mat-divider></mat-divider>
+    
+        <mat-divider></mat-divider>
+        <!--START Open Sessions Section-->
+        <app-opensessions
+        [key]="tabs[index]"
+        [OriginalOpenSessions]="accountgraph[tabs[index]].opensessions"
+        [accountgraph]="accountgraph"
+        (updateObjectOpenSessions)="updateObjectOpenSessions($event)"
+        (createNewKey)="createNewKey($event)"
+        ></app-opensessions>
+        <!--END Open Sessions Section-->
+    
         <!--START Footer -->
         <br>
         <div class="container">
@@ -150,14 +109,15 @@
     <br>
     <mat-divider></mat-divider>  
     <br>
-    <div class="row">
-      <div class="col-6">
-        <!-- R1: Add Profile Tabs-->
-      <button mat-raised-button color="primary" (click)="addTab(); scroll(target)">Add {{profileType}}</button>
-      </div>
-      <div class="col-6"> <!-- R5: Next Option Section -->
-        <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(0)">Next Section  ></button></div>
+  <div class="row">
+    <div class="col-6">
+      <!-- R1: Add Profile Tabs-->
+    <button mat-raised-button color="primary" (click)="addTab(); scroll(target)">Add {{profileType}}</button>
     </div>
+    <div class="col-6"> <!-- R5: Next Option Section -->
+      <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(7)">Next Section  ></button></div>
+  </div>
     </div>
   </mat-sidenav-content>
   </mat-sidenav-container>
+    

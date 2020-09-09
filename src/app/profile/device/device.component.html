@@ -18,7 +18,7 @@
 
   <button mat-flat-button class="sidebarBtn" (click)="opened=!opened" aria-label="Open the side menu">☰</button>
 
-  <div class="container">
+  <div class="container" #target>
   <h1><b>{{profileTitle}}</b></h1>
   <h3>{{profileSlogan}}</h3>
 
@@ -114,24 +114,14 @@
 <br>
 <mat-divider></mat-divider>
 <br>
-  <div class="row">
-    <div class="col-8">
-      <!-- <button mat-raised-button color="primary">Add Note</button> -->
-      <!-- <div *ngFor="let note of notes;">
-        <app-notes
-        [token]="NoteNumber"
-        (updateNote)="updateNote($event)"
-        ></app-notes>
-      </div> -->
-    </div>
-    <div class="col-2"><p *ngIf="NumberofNotes>0">Notes: {{NumberofNotes}}</p></div>
-    <div class="col-2">
-
-      
-      <!-- R5: Next Option Section -->
-      <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(1)" > Next Section  ></button>
-    </div>
+<div class="row">
+  <div class="col-6">
+    <!-- R1: Add Profile Tabs-->
+  <button mat-raised-button color="primary" (click)="addTab(); scroll(target)">Add {{profileType}}</button>
   </div>
+  <div class="col-6"> <!-- R5: Next Option Section -->
+    <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(1)">Next Section  ></button></div>
+</div>
 </div>
 </mat-sidenav-content>
 </mat-sidenav-container>

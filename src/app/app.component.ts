@@ -13,6 +13,11 @@ export class AppComponent {
   passwordmanagerKeys: any[] =[];
   emailKeys: any[] =[];
   passwordKeys: any[] =[];
+  socialmediaKeys: any[] =[];
+  financeKeys: any[] =[];
+  shoppingKeys: any[] =[];
+  entertainmentKeys: any[] = [];
+  gamingKeys: any[] = [];
   otherKeys: any[] =[];
 
   getAccountgraph(data){
@@ -49,6 +54,37 @@ export class AppComponent {
     this.passwordKeys=data;
   }
 
+  getSocialMediaKeys(data){
+    console.log("Social Media Keys Saved");
+    this.socialmediaKeys=data;
+  }
+
+  getFinanceKeys(data){
+    console.log("Finance Keys Saved");
+    this.financeKeys=data;
+  }
+
+  getShoppingKeys(data){
+    console.log("Shopping Keys Saved");
+    this.shoppingKeys=data;
+  }
+
+  getEntertainmentKeys(data){
+    console.log("Entertainment Keys Saved");
+    this.entertainmentKeys=data;
+  }
+
+  getGamingKeys(data){
+    console.log("Gaming Keys Saved");
+    this.gamingKeys=data;
+  }
+
+  getOtherKeys(data){
+    console.log("Other Keys Saved");
+    this.otherKeys=data;
+  }
+
+
 
 
   updateKeysRegisters(type: string, name: string): void{
@@ -66,11 +102,35 @@ export class AppComponent {
       case "Email": { 
         this.emailKeys.push(keyToAdd);
         break; 
-     }
-     case "Password": { 
-      this.passwordKeys.push(keyToAdd);
-      break; 
-   }
+      }
+      case "Social Media": { 
+        this.socialmediaKeys.push(keyToAdd);
+        break; 
+        }
+        case "Finance": { 
+          this.financeKeys.push(keyToAdd);
+          break; 
+        }
+        case "Shopping": { 
+          this.shoppingKeys.push(keyToAdd);
+          break; 
+        }
+        case "Entertainment": { 
+          this.entertainmentKeys.push(keyToAdd);
+          break; 
+        }
+        case "Gaming": { 
+          this.gamingKeys.push(keyToAdd);
+          break; 
+        }
+        case "Password": { 
+          this.passwordKeys.push(keyToAdd);
+          break; 
+        }
+        case "Other": { 
+          this.otherKeys.push(keyToAdd);
+          break; 
+        }
       default: { 
          //Add to the other list 
          this.otherKeys.push(keyToAdd);

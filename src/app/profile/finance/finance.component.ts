@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-passwordmanager',
-  templateUrl: './passwordmanager.component.html',
-  styleUrls: ['./passwordmanager.component.scss']
+  selector: 'app-finance',
+  templateUrl: './finance.component.html',
+  styleUrls: ['./finance.component.scss']
 })
-export class PasswordmanagerComponent implements OnInit {
+export class FinanceComponent implements OnInit {
   @Input() accountgraph;
-  @Input() tabs
+  @Input() tabs;
   @Output() getAccountgraph: EventEmitter<any>= new EventEmitter()
-  @Output() getPasswordmanagerKeys: EventEmitter<any>= new EventEmitter()
+  @Output() getFinanceKeys: EventEmitter<any>= new EventEmitter()
 
-  profileTitle: string= 'Password Managers';
-  profileSlogan: string= 'Do you use password managers to access any of your accounts? '
-  profileType: string= 'Password Manager'
+  profileTitle: string= 'Finance';
+  profileSlogan: string= 'How do you access your online finances? '
+  profileType: string= 'Finance'
 
 
 //tabs: any[] = [];
@@ -215,7 +215,7 @@ this.getAccountgraph.emit({
   needToCreate: this.DynamicallyCreatedKeys
 });
 
-this.getPasswordmanagerKeys.emit(this.tabs);
+this.getFinanceKeys.emit(this.tabs);
 }
 
 //Add note as a field of the object

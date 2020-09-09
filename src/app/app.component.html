@@ -30,6 +30,66 @@
       </app-email>
       </some-element>
 
+      <some-element *ngSwitchCase=3>
+        <!-- Load Social Media Page -->
+        <app-socialmedia
+          [accountgraph]="accountgraph"
+          [tabs]="socialmediaKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getSocialMediaKeys)="getSocialMediaKeys($event)">
+        </app-socialmedia>
+      </some-element>
+
+      <some-element *ngSwitchCase=4>
+        <!-- Load Finances Page -->
+        <app-finance
+          [accountgraph]="accountgraph"
+          [tabs]="financeKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getFinanceKeys)="getFinanceKeys($event)">
+        </app-finance>
+      </some-element>
+
+      <some-element *ngSwitchCase=5>
+        <!-- Load Shopping Page -->
+        <app-shopping
+          [accountgraph]="accountgraph"
+          [tabs]="shoppingKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getShoppingKeys)="getShoppingKeys($event)">
+        </app-shopping>
+      </some-element>
+
+      <some-element *ngSwitchCase=6>
+        <!-- Load Entertainment Page -->
+        <app-entertainment
+          [accountgraph]="accountgraph"
+          [tabs]="entertainmentKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getEntertainmentKeys)="getEntertainmentKeys($event)">
+        </app-entertainment>
+      </some-element>
+
+      <some-element *ngSwitchCase=7>
+        <!-- Load Gaming Page -->
+        <app-gaming
+          [accountgraph]="accountgraph"
+          [tabs]="gamingKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getGamingKeys)="getGamingKeys($event)">
+        </app-gaming>
+      </some-element>
+      
+      <some-element *ngSwitchCase=8>
+        <!-- Load Other Page -->
+        <app-other
+          [accountgraph]="accountgraph"
+          [tabs]="otherKeys"
+          (getAccountgraph)="getAccountgraph($event)"
+          (getOtherKeys)="getOtherKeys($event)">
+        </app-other>
+      </some-element>
+
       <some-element *ngSwitchCase=9>
         <!-- Load Passwords Page -->
         <app-password
