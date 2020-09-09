@@ -23,13 +23,12 @@
   <h3>{{profileSlogan}}</h3>
 
   <!-- R1: Add Profile Tabs-->
-  <button mat-raised-button color="primary" (click)="addTab()">Add {{profileType}}</button>
+  <button mat-raised-button color="primary" (click)="addTab()" >Add {{profileType}}</button>
   <br>
   <br>
-  <mat-tab-group animationDuration="0ms">
-  <mat-tab *ngFor="let tab of tabs; let index = index;" [label]= "accountgraph[tabs[index]].name">
+  <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" >
+  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="accountgraph[tabs[index]].name+' '+(index+1)">
     <ng-template matTabContent>
-
     <br>
     <br>
   <!--START Nickname-->
@@ -38,13 +37,13 @@
     <div class="container">
       <!--Check if the user has set a nickname or not-->
       <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
-        <h2><b>Nickname for {{profileType}}: </b> {{accountgraph[tabs[index]].name}}</h2>
-        <button mat-raised-button color="primary" (click)="accountgraph[tabs[index]].name=profileType">Edit</button>
+        <h2><b>Nickname for {{profileType}}: </b> {{accountgraph[tabs[index]].name+" "+(index+1)}}</h2>
+        <button mat-raised-button color="primary" (click)="oldname=accountgraph[tabs[index]].name; accountgraph[tabs[index]].name=profileType; editing=true ">Edit</button>
       </div>
       <!--User has not set a nickname-->
       <ng-template #elseBlock>
         <h2><b>{{profileType}} Nickname</b></h2>
-        <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index)">
+        <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index); editing=false">
           <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
           <mat-label>Choose a nickname for this device:</mat-label>
           <input matInput type="text" name="newname" ngModel placeholder="Nickname"  required>
@@ -52,6 +51,9 @@
           </mat-form-field>
           <br>
           <button mat-raised-button color="primary">Confirm</button>
+          <div *ngIf="editing">
+          <button mat-raised-button color="warn" (click)="accountgraph[tabs[index]].name=oldname">Cancel</button>
+        </div>
         </form>
       </ng-template>
     </div>

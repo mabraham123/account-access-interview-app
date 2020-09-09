@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
+import {FormControl} from '@angular/forms';
 //ViewContainerRef, ComponentFactoryResolver
 @Component({
   selector: 'app-device',
@@ -21,27 +22,36 @@ export class DeviceComponent  implements OnInit{
   //notes: any[]= [];
   name: string;
   newname: string;
+  oldname:string;
   nicknameSet: boolean;
   exists: boolean;
   NumberofNotes: number;
   remove: boolean;
   opened: boolean;
   DynamicallyCreatedKeys: any[]= [];
+  selected:any;
+  editing:boolean
+  
   //NoteNumber: number;
   //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
   constructor(){
     this.name= this.profileType;
     this.newname="";
+    this.oldname=this.profileType.toLowerCase();
     this.nicknameSet= false;
     this.exists=false;
     this.NumberofNotes=0;
     this.remove=false;
     this.opened=false;
+    this.selected = new FormControl(0);
+    this.editing=false;
     //this.NoteNumber=0;
+    
   }
 
   ngOnInit(): void {
-    console.log(this.tabs)
+    console.log(this.tabs);
+    //this.activeLink = this.tabs[this.tabs.length-1];
   }
 
   /**
@@ -69,6 +79,7 @@ export class DeviceComponent  implements OnInit{
     console.log(this.accountgraph);
     console.log(this.tabs);
 
+    this.selected.setValue(this.tabs.length - 1)
 
 
   }
