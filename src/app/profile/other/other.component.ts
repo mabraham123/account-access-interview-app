@@ -21,6 +21,7 @@ export class OtherComponent implements OnInit {
 //notes: any[]= [];
 name: string;
 newname: string;
+oldname: string;
 nicknameSet: boolean;
 exists: boolean;
 NumberofNotes: number;
@@ -33,6 +34,7 @@ DynamicallyCreatedKeys: any[]= [];
 constructor(){
   this.name= this.profileType;
   this.newname="";
+  this.oldname=this.profileType.toLowerCase();
   this.nicknameSet= false;
   this.exists=false;
   this.NumberofNotes=0;
@@ -227,6 +229,12 @@ updateNote(data){
 
 scroll(el: HTMLElement) {
   el.scrollIntoView({behavior: 'smooth'});
+}
+
+startOver(){
+  if(confirm("Are you sure you want to start again? Doing so will result in a loss of data.")){
+  this.prepareToChangePage(-1);
+  }
 }
 
 }

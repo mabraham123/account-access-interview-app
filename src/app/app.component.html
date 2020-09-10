@@ -1,13 +1,21 @@
 <div class="container">
-  <div *ngIf="!off">
-    <button mat-flat-button color="primary" (click)="uploaded=true; off=true">Upload File</button>
-  </div>
+
+
   
-  <div *ngIf="uploaded">
-    <input type="file" (change)="onFileSelected($event)">
-  </div>
+
   
   <container-element [ngSwitch]="currentPage">
+    <some-element *ngSwitchCase=-1>
+      <h1>Welcome to the interview</h1>
+      <button mat-raised-button  color="primary" (click)="currentPage=0; started=true">Start</button>
+      <div *ngIf="!dontdisplay">
+        <button mat-raised-button  (click)="uploaded=true; dontdisplay=true">Upload File</button>
+      </div>
+      <div *ngIf="uploaded">
+        <input type="file" (change)="onFileSelected($event)">
+      </div>
+      </some-element>
+
     <some-element *ngSwitchCase=0>
     <!-- Load Devices Page -->
     <app-device
@@ -107,6 +115,15 @@
           (getPasswordKeys)="getPasswordKeys($event)">
         </app-password>
         </some-element>
+
+        <some-element *ngSwitchCase=10>
+          <!-- Load Passwords Page -->
+          <h1>Ended</h1>
+          <h2>Thank you for participating in this Interview</h2>
+          <button mat-raised-button color="primary" (click)="save()">Save Results</button>
+          <br>
+          {{finalData}}
+          </some-element>
     
   </container-element>
 

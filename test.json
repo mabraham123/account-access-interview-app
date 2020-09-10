@@ -1,0 +1,1 @@
+{"Device: iphone":{"name":"iphone","type":"Device","ViewWhenLocked":"","incoming":[{"recovery":true,"needed":["Password: pwd1"]}]},"Password: pwd1":{"name":"pwd1","type":"Password","ViewWhenLocked":"","incoming":[],"strength":"average"}}

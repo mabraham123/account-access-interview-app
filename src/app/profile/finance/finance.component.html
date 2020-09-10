@@ -13,6 +13,11 @@
         <li><button mat-button color="primary" (click)="prepareToChangePage(8)">Other</button></li>
         <li><button mat-button color="primary" (click)="prepareToChangePage(9)">Passwords Summary</button></li>
       </ol>
+      <button mat-raised-button color="primary" (click)="prepareToChangePage(10)">Finish</button>
+      <br>
+    <br>
+    <br>
+    <button  mat-flat-button color="warn" (click)="startOver()">Start Again</button>
       
       
     </mat-sidenav>
@@ -22,39 +27,41 @@
   <div class="container" #target>
     <h1><b>{{profileTitle}}</b></h1>
       <h3>{{profileSlogan}}</h3>  
-      <!-- R1: Add Profile Tabs-->
-      <button mat-raised-button color="primary" (click)="addTab()">Add {{profileType}}</button>
-      <br>
-      <br>
-      <mat-tab-group animationDuration="0ms">
-      <mat-tab *ngFor="let tab of tabs; let index = index;" [label]= "accountgraph[tabs[index]].name">
-        <ng-template matTabContent>
-    
+     <!-- R1: Add Profile Tabs-->
+<button mat-raised-button color="primary" (click)="addTab()" >Add {{profileType}}</button>
+<br>
+<br>
+<mat-tab-group animationDuration="0ms">
+<mat-tab *ngFor="let tab of tabs; let index = index" [label]="profileType+' '+(index+1)+': '+accountgraph[tabs[index]].name">
+  <ng-template matTabContent>
+  <br>
+  <br>
+<!--START Nickname-->
+  <!--R1.1 Input box to allow the user to set a nickname-->
+
+  <div class="container">
+    <!--Check if the user has set a nickname or not-->
+    <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
+      <h2><b>Nickname for {{profileType + ' ' + (index+1)+':'}} </b> {{accountgraph[tabs[index]].name}}</h2>
+      <button mat-raised-button color="primary" (click)="oldname=accountgraph[tabs[index]].name; accountgraph[tabs[index]].name=profileType; editing=true ">Edit</button>
+    </div>
+    <!--User has not set a nickname-->
+    <ng-template #elseBlock>
+      <h2><b>{{profileType}} Nickname</b></h2>
+      <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index); editing=false">
+        <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+        <mat-label>Choose a nickname for this device:</mat-label>
+        <input matInput type="text" name="newname" ngModel placeholder="Nickname"  required>
+        <mat-hint>E.g- Laptop1,WorkPhone2, AppleWatch1</mat-hint>
+        </mat-form-field>
         <br>
-        <br>
-      <!--START Nickname-->
-        <!--R1.1 Input box to allow the user to set a nickname-->
-    
-        <div class="container">
-          <!--Check if the user has set a nickname or not-->
-          <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
-            <h2><b>Nickname for {{profileType}}: </b> {{accountgraph[tabs[index]].name}}</h2>
-            <button mat-raised-button color="primary" (click)="accountgraph[tabs[index]].name=profileType">Edit</button>
-          </div>
-          <!--User has not set a nickname-->
-          <ng-template #elseBlock>
-            <h2><b>{{profileType}} Nickname</b></h2>
-            <form #nicknameForm="ngForm" (ngSubmit)="updateName(nicknameForm.value,index)">
-              <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
-              <mat-label>Choose a nickname for this device:</mat-label>
-              <input matInput type="text" name="newname" ngModel placeholder="Nickname"  required>
-              <mat-hint>E.g- Laptop1,WorkPhone2, AppleWatch1</mat-hint>
-              </mat-form-field>
-              <br>
-              <button mat-raised-button color="primary">Confirm</button>
-            </form>
-          </ng-template>
-        </div>
+        <button mat-raised-button color="primary">Confirm</button>
+        <div *ngIf="editing">
+        <button mat-raised-button color="warn" (click)="accountgraph[tabs[index]].name=oldname; oldname=this.profileType.toLowerCase()">Cancel</button>
+      </div>
+      </form>
+    </ng-template>
+  </div>
       <!--END Nickname-->
         <mat-divider></mat-divider>
         <!--START Login Methods Section-->

@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter} from '@angular/core';
 export class AppComponent{
   title = 'account-access-interview-app';
   accountgraph={};
-  currentPage: number=0;
+  currentPage: number=-1;
   devicesKeys: any[] = [];
   passwordmanagerKeys: any[] =[];
   emailKeys: any[] =[];
@@ -20,20 +20,24 @@ export class AppComponent{
   gamingKeys: any[] = [];
   otherKeys: any[] =[];
   uploaded:boolean= false;
-  off:boolean=false;
+  dontdisplay:boolean=false;
+  finalData: string="";
 
 
   getAccountgraph(data){
-    console.log("Main hashtable updated");
-    this.accountgraph=data.accountgraph;
-    console.log(this.accountgraph);
-    
-    console.log(data)
-    for (let index = 0; index < data.needToCreate.length; index++) {
-     this.updateKeysRegisters(data.needToCreate[index].type, data.needToCreate[index].key);
+    if(data.changePageTo===-1){
+      location.reload();
+    }else{
+      console.log("Main hashtable updated");
+      this.accountgraph=data.accountgraph;
+      console.log(this.accountgraph);
+      
+      console.log(data)
+      for (let index = 0; index < data.needToCreate.length; index++) {
+        this.updateKeysRegisters(data.needToCreate[index].type, data.needToCreate[index].key);
+      }
+      this.currentPage=data.changePageTo;
     }
-
-    this.currentPage=data.changePageTo;
   }
 
 
@@ -144,17 +148,15 @@ export class AppComponent{
   }
 
   onFileSelected(event){
-    let abc;
     let file = event.target.files[0];
     let reader = new FileReader();
     reader.onload = (event) => {
       this.accountgraph=JSON.parse(event.target.result as string);
       this.loadItems();
       this.uploaded=false;
+      alert('File uplaoded successfully');
     }
     reader.readAsText(file);
-
-    
   }
 
   loadItems(){
@@ -213,6 +215,12 @@ export class AppComponent{
       return found
       }
 
+      save(){
+        this.finalData=JSON.stringify(this.accountgraph);
+
+        let myWindow=window.open('',"_blank",this.finalData);
+        myWindow.document.write(this.finalData);
+      }
 
 
 }

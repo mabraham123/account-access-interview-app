@@ -13,6 +13,11 @@
       <li><button mat-button color="primary" (click)="prepareToChangePage(8)">Other</button></li>
       <li><button mat-button color="primary" (click)="prepareToChangePage(9)">Passwords Summary</button></li>
     </ol>
+    <button mat-raised-button color="primary" (click)="prepareToChangePage(10)">Finish</button>
+    <br>
+    <br>
+    <br>
+    <button  mat-flat-button color="warn" (click)="startOver()">Start Again</button>
   </mat-sidenav>
   <mat-sidenav-content>
 
@@ -26,8 +31,8 @@
   <button mat-raised-button color="primary" (click)="addTab()" >Add {{profileType}}</button>
   <br>
   <br>
-  <mat-tab-group animationDuration="0ms" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" >
-  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="accountgraph[tabs[index]].name+' '+(index+1)">
+  <mat-tab-group animationDuration="0ms">
+  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="profileType+' '+(index+1)+': '+accountgraph[tabs[index]].name">
     <ng-template matTabContent>
     <br>
     <br>
@@ -37,7 +42,7 @@
     <div class="container">
       <!--Check if the user has set a nickname or not-->
       <div *ngIf="accountgraph[tabs[index]].name !== profileType; else elseBlock">
-        <h2><b>Nickname for {{profileType}}: </b> {{accountgraph[tabs[index]].name+" "+(index+1)}}</h2>
+        <h2><b>Nickname for {{profileType + ' ' + (index+1)+':'}} </b> {{accountgraph[tabs[index]].name}}</h2>
         <button mat-raised-button color="primary" (click)="oldname=accountgraph[tabs[index]].name; accountgraph[tabs[index]].name=profileType; editing=true ">Edit</button>
       </div>
       <!--User has not set a nickname-->
@@ -52,7 +57,7 @@
           <br>
           <button mat-raised-button color="primary">Confirm</button>
           <div *ngIf="editing">
-          <button mat-raised-button color="warn" (click)="accountgraph[tabs[index]].name=oldname">Cancel</button>
+          <button mat-raised-button color="warn" (click)="accountgraph[tabs[index]].name=oldname; oldname=this.profileType.toLowerCase()">Cancel</button>
         </div>
         </form>
       </ng-template>

@@ -29,7 +29,6 @@ export class DeviceComponent  implements OnInit{
   remove: boolean;
   opened: boolean;
   DynamicallyCreatedKeys: any[]= [];
-  selected:any;
   editing:boolean
   
   //NoteNumber: number;
@@ -43,7 +42,6 @@ export class DeviceComponent  implements OnInit{
     this.NumberofNotes=0;
     this.remove=false;
     this.opened=false;
-    this.selected = new FormControl(0);
     this.editing=false;
     //this.NoteNumber=0;
     
@@ -51,8 +49,9 @@ export class DeviceComponent  implements OnInit{
 
   ngOnInit(): void {
     console.log(this.tabs);
-    //this.activeLink = this.tabs[this.tabs.length-1];
+
   }
+
 
   /**
   * Method to add a tab from the array of tabs
@@ -78,8 +77,6 @@ export class DeviceComponent  implements OnInit{
 
     console.log(this.accountgraph);
     console.log(this.tabs);
-
-    this.selected.setValue(this.tabs.length - 1)
 
 
   }
@@ -230,6 +227,12 @@ prepareToChangePage(pageCode: number){
 
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth'});
+  }
+
+  startOver(){
+    if(confirm("Are you sure you want to start again? Doing so will result in a loss of data.")){
+    this.prepareToChangePage(-1);
+    }
   }
 
 }
