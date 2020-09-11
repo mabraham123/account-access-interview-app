@@ -241,5 +241,9 @@ export class AppComponent{
         }
       }
 
+      visualise(){
+        console.log("Visualising Account graph");
+      }
+
 
 }
