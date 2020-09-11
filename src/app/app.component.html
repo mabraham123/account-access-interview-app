@@ -6,14 +6,20 @@
   
   <container-element [ngSwitch]="currentPage">
     <some-element *ngSwitchCase=-1>
-      <h1>Welcome to the interview</h1>
-      <button mat-raised-button  color="primary" (click)="currentPage=0; started=true">Start</button>
-      <div *ngIf="!dontdisplay">
-        <button mat-raised-button  (click)="uploaded=true; dontdisplay=true">Upload File</button>
+    <mat-sidenav-container>
+    <mat-sidenav-content>
+      <div class="container">
+        <h1>Welcome to the interview</h1>
+        <button mat-raised-button  color="primary" (click)="currentPage=0; started=true">Start</button>
+        <div *ngIf="!dontdisplay">
+          <button mat-raised-button  (click)="uploaded=true; dontdisplay=true">Upload File</button>
+        </div>
+        <div *ngIf="uploaded">
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
       </div>
-      <div *ngIf="uploaded">
-        <input type="file" (change)="onFileSelected($event)">
-      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
       </some-element>
 
     <some-element *ngSwitchCase=0>
@@ -118,11 +124,43 @@
 
         <some-element *ngSwitchCase=10>
           <!-- Load Passwords Page -->
-          <h1>Ended</h1>
-          <h2>Thank you for participating in this Interview</h2>
-          <button mat-raised-button color="primary" (click)="save()">Save Results</button>
-          <br>
+          <mat-sidenav-container>
+            <mat-sidenav [(opened)]="opened" mode="push">
+              <h2><u><b>Account Graphs</b></u></h2>
+              <ol>
+                <li><button mat-button color="primary" (click)="currentPage=0">Devices</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=1">Password Managers</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=2">Emails</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=3">Social Media</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=4">Finance</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=5">Shopping</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=6">Entertainment</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=7">Gaming</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=8">Other</button></li>
+                <li><button mat-button color="primary" (click)="currentPage=9">Passwords Summary</button></li>
+              </ol>
+              <br>
+              <br>
+              <br>
+              <button  mat-flat-button color="warn" (click)="startOver()">Reset</button>
+            </mat-sidenav>
+            <mat-sidenav-content>
+              <button mat-flat-button class="sidebarBtn" (click)="opened=!opened" aria-label="Open the side menu">☰ Go Back</button>
+              <div class="container">
+                <h1>Ended</h1>
+                <h2>Thank you for participating in this Interview</h2>
+                <button mat-raised-button color="primary" (click)="save()">Save Results</button>
+              </div>
+          </mat-sidenav-content>
+          </mat-sidenav-container>
+          
+
+          
+
+
+          
           </some-element>
+          
     
   </container-element>
 
@@ -132,3 +170,7 @@
 
 
 <router-outlet></router-outlet>
+
+
+
+

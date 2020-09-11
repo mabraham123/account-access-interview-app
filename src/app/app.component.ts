@@ -22,6 +22,7 @@ export class AppComponent{
   uploaded:boolean= false;
   dontdisplay:boolean=false;
   finalData: string="";
+  opened: boolean=false;
 
 
   getAccountgraph(data){
@@ -232,6 +233,12 @@ export class AppComponent{
         
 //        let myWindow=window.open('',"_blank",this.finalData);
 //        myWindow.document.write(this.finalData);
+      }
+
+      startOver(){
+        if(confirm("Are you sure you want to start again? Doing so will result in a loss of data.")){
+          location.reload();
+        }
       }
 
 
