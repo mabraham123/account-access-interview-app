@@ -215,11 +215,23 @@ export class AppComponent{
       return found
       }
 
+
       save(){
         this.finalData=JSON.stringify(this.accountgraph);
 
-        let myWindow=window.open('',"_blank",this.finalData);
-        myWindow.document.write(this.finalData);
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:json;charset=utf-8,' + encodeURIComponent(this.finalData));
+        element.setAttribute('download', 'GraphJSON.json');
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+        
+//        let myWindow=window.open('',"_blank",this.finalData);
+//        myWindow.document.write(this.finalData);
       }
 
 
