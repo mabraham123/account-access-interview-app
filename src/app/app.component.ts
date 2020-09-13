@@ -242,8 +242,35 @@ export class AppComponent{
       }
 
       visualise(){
-        console.log("Visualising Account graph");
-      }
+        console.log("Visualise Results");
 
+        var xmlhttp;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
 
+            xmlhttp.onreadystatechange = ()=> {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                {
+                  var output = xmlhttp.responseText;
+                  var div = document.getElementById("GraphVisualisation");
+                  var element = document.createElement('object');
+                  element.setAttribute('type', 'image/svg+xml')
+                  element.innerHTML = output;
+                  div.innerHTML = "";
+                  div.appendChild(element);
+                }else if (xmlhttp.readyState == 4) {
+                  console.log('Alert: ', xmlhttp.statusText);
+                }
+            }
+
+            var myJSON = JSON.stringify(this.accountgraph);
+            xmlhttp.open("POST", "/cgi-bin/visualise.py", true);
+            xmlhttp.setRequestHeader('Content-Type', 'application/x- www-form-urlencoded; charset=UTF-8')
+            xmlhttp.send("graph=" + myJSON);
+        }else {
+          // code for browsers that do not support XMLHTTPRequest();                                     
+          xmlhttp = null;
+          console.log("XMLHttpRequest not supported.");
+        }
+    }
 }
