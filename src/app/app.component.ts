@@ -23,6 +23,8 @@ export class AppComponent{
   dontdisplay:boolean=false;
   finalData: string="";
   opened: boolean=false;
+  participantIdentifier: string="";
+  participantIdentifierSet: boolean=false;
 
 
   getAccountgraph(data){
@@ -38,6 +40,10 @@ export class AppComponent{
         this.updateKeysRegisters(data.needToCreate[index].type, data.needToCreate[index].key);
       }
       this.currentPage=data.changePageTo;
+
+      if(this.currentPage===10){
+        this.visualise();
+      }
     }
   }
 
@@ -220,9 +226,14 @@ export class AppComponent{
       save(){
         this.finalData=JSON.stringify(this.accountgraph);
 
+        let name="GraphJSON.json"
+        if(this.participantIdentifier!==""){
+          name= this.participantIdentifier+".json";
+        }
+        
         var element = document.createElement('a');
         element.setAttribute('href', 'data:json;charset=utf-8,' + encodeURIComponent(this.finalData));
-        element.setAttribute('download', 'GraphJSON.json');
+        element.setAttribute('download', name);
 
         element.style.display = 'none';
         document.body.appendChild(element);
@@ -230,9 +241,6 @@ export class AppComponent{
         element.click();
 
         document.body.removeChild(element);
-        
-//        let myWindow=window.open('',"_blank",this.finalData);
-//        myWindow.document.write(this.finalData);
       }
 
       startOver(){
@@ -273,4 +281,12 @@ export class AppComponent{
           console.log("XMLHttpRequest not supported.");
         }
     }
+
+    updateParticipantName(name1){
+      console.log(this.participantIdentifier);
+      this.participantIdentifier=name1;
+      console.log(this.participantIdentifier);
+      this.participantIdentifierSet=true;
+    }
+
 }

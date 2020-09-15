@@ -9,13 +9,47 @@
     <mat-sidenav-container>
     <mat-sidenav-content>
       <div class="container">
-        <h1>Welcome to the interview</h1>
-        <button mat-raised-button  color="primary" (click)="currentPage=0; started=true">Start</button>
+        <h1><u><b>Welcome to the interview</b></u></h1>
+        <div class="row">
+          <div class="col-12">
+            <h2>Participant Identifier</h2>
+            <div *ngIf="participantIdentifierSet; else elseblock">
+              <h2><b>Participant:</b> {{participantIdentifier}}</h2>
+              <button mat-raised-button color="primary" (click)="participantIdentifierSet=false">Edit</button>
+            </div>
+            <ng-template #elseblock>
+              <form>
+              <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+                <mat-lable>Set Participants identifier:</mat-lable>
+                <input matInput type="text" #participantname>
+                <mat-hint>E.g- 01, Participant89, p104</mat-hint>
+              </mat-form-field>
+              <br>
+              <br>
+              <button mat-raised-button (click)="updateParticipantName(participantname.value)">Set Participant Identifier</button>
+            </form>
+            </ng-template>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <h2>Optional Settings:</h2>
         <div *ngIf="!dontdisplay">
           <button mat-raised-button  (click)="uploaded=true; dontdisplay=true">Upload File</button>
         </div>
         <div *ngIf="uploaded">
           <input type="file" (change)="onFileSelected($event)">
+        </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <button mat-raised-button  color="primary" (click)="currentPage=0; started=true" class="right">Start Interview</button>
+          </div>
         </div>
       </div>
     </mat-sidenav-content>
@@ -149,8 +183,31 @@
               <div class="container">
                 <h1>Ended</h1>
                 <h2>Thank you for participating in this Interview</h2>
+                <div class="row">
+                  <div class="col-12">
+                    <div *ngIf="participantIdentifierSet; else elseblock">
+                      <h2><b>Participant:</b> {{participantIdentifier}}</h2>
+                      <button mat-raised-button color="primary" (click)="participantIdentifierSet=false">Edit</button>
+                    </div>
+                    <ng-template #elseblock>
+                      <form>
+                      <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+                        <mat-lable>Set Participants identifier:</mat-lable>
+                        <input matInput type="text" #participantname>
+                        <mat-hint>E.g- 01, Participant89, p104</mat-hint>
+                      </mat-form-field>
+                      <br>
+                      <br>
+                      <button mat-raised-button (click)="updateParticipantName(participantname.value)">Set Participant Identifier</button>
+                    </form>
+                    </ng-template>
+                  </div>
+                </div>
+
+                <br>
+                <br>
                 <button mat-raised-button color="primary" (click)="save()">Save Results</button>
-                <button mat-raised-button  (click)="visualise()">Visualise</button>
+                <!-- <button mat-raised-button  (click)="visualise()">Visualise</button> -->
                 <div id="GraphVisualisation"></div>
               </div>
           </mat-sidenav-content>
