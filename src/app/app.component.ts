@@ -249,9 +249,13 @@ export class AppComponent{
         }
       }
 
+      findBackdoors(){
+        console.log("Find backdoors in results");
+      }
+
+
       visualise(){
         console.log("Visualise Results");
-
         var xmlhttp;
         if (window.XMLHttpRequest) {
             xmlhttp = new XMLHttpRequest();
@@ -259,10 +263,11 @@ export class AppComponent{
             xmlhttp.onreadystatechange = ()=> {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
                 {
+                  
                   var output = xmlhttp.responseText;
                   var div = document.getElementById("GraphVisualisation");
-                  var element = document.createElement('object');
-                  element.setAttribute('type', 'image/svg+xml')
+                  var element = document.createElement('div');
+                  element.setAttribute('type', 'img/svg+xml');
                   element.innerHTML = output;
                   div.innerHTML = "";
                   div.appendChild(element);
