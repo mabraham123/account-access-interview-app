@@ -37,8 +37,12 @@ export class AppComponent{
       
       console.log(data)
       for (let index = 0; index < data.needToCreate.length; index++) {
+        console.log(data.needToCreate[index].type);
+        console.log(data.needToCreate[index].key);
         this.updateKeysRegisters(data.needToCreate[index].type, data.needToCreate[index].key);
       }
+
+      console.log("EmailKeys: "+ this.emailKeys);
       this.currentPage=data.changePageTo;
 
       if(this.currentPage===10){
@@ -59,7 +63,7 @@ export class AppComponent{
   }
 
   getEmailKeys(data){
-    console.log("Password Manager Keys Saved");
+    console.log("Email Keys Saved");
     this.emailKeys=data;
   }
 
@@ -168,7 +172,7 @@ export class AppComponent{
 
   loadItems(){
     this.devicesKeys=this.findInHashtable("type","Device");
-    this.passwordmanagerKeys=this.findInHashtable("type","Password Mananger");
+    this.passwordmanagerKeys=this.findInHashtable("type","Password Manager");
     this.emailKeys=this.findInHashtable("type","Email");
     this.socialmediaKeys=this.findInHashtable("type","Social Media");
     this.financeKeys=this.findInHashtable("type","Finance");
@@ -249,12 +253,20 @@ export class AppComponent{
         }
       }
 
-      findBackdoors(){
+      findBackdoors(Findtype:string){
         console.log("Find backdoors in results");
+         var arg = { "transform": "akv(color,yellow,backdoors(type(Findtype)))" };
+         this.visualise(arg);
+      }
+
+      findCentralVertices(){
+        console.log("Find Central Vertices in results");
+        var arg = { "transform": "top_sc()" };
+        this.visualise(arg);
       }
 
 
-      visualise(){
+      visualise(arg={}){
         console.log("Visualise Results");
         var xmlhttp;
         if (window.XMLHttpRequest) {
@@ -274,12 +286,15 @@ export class AppComponent{
                 }else if (xmlhttp.readyState == 4) {
                   console.log('Alert: ', xmlhttp.statusText);
                 }
-            }
+            };
 
-            var myJSON = JSON.stringify(this.accountgraph);
-            xmlhttp.open("POST", "/cgi-bin/visualise.py", true);
-            xmlhttp.setRequestHeader('Content-Type', 'application/x- www-form-urlencoded; charset=UTF-8')
-            xmlhttp.send("graph=" + myJSON);
+            var myJSON = JSON.stringify(this.accountgraph); 
+            var argstr= JSON.stringify(arg);
+            console.log(argstr);
+            console.log(arg);
+            xmlhttp.open("POST", "/cgi-bin/visualise.exe", true);
+            xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
+            xmlhttp.send("graph=" + encodeURIComponent(myJSON) + "&arg=" + encodeURIComponent(argstr));
         }else {
           // code for browsers that do not support XMLHTTPRequest();                                     
           xmlhttp = null;
@@ -293,5 +308,15 @@ export class AppComponent{
       console.log(this.participantIdentifier);
       this.participantIdentifierSet=true;
     }
+
+    checkInput(){
+      if(this.participantIdentifier===""){
+        alert("Press Enter");
+      }
+
+
+    }
+
+    
 
 }

@@ -61,6 +61,7 @@
         </div>
         </form>
       </ng-template>
+   
     </div>
   <!--END Nickname-->
     <mat-divider></mat-divider>
@@ -101,15 +102,46 @@
           </app-notes>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <!-- R4: Remove Profile Button-->
-            <button mat-raised-button color="warn" (click)="removeTab(index)" class="right">
+        <br>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <br>
+
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Interview Edits
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <h2><b>Change the type</b></h2>
+              <form>
+                <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+                  <mat-lable>What type do you want to change this too?</mat-lable>
+                  <input matInput type="text" #newtype>
+                </mat-form-field>
+                <button mat-raised-button (click)="ChangeProfileType(index,newtype.value)" color="primary">Change Type</button>
+              </form>
+              <br>
+              <mat-divider></mat-divider>
+              <br>
+              <br>
+              <h2><b>Other Edits</b></h2>
+              
+            <button mat-raised-button color="primary" (click)="duplicateTab(index)">
+              Duplicate {{profileType}}
+            </button>
+             <!-- R4: Remove Profile Button-->
+             <button mat-raised-button color="warn" (click)="removeTab(index)">
               Delete {{profileType}}
             </button>
-            
-          </div>
-        </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <br>
+
       </div>
     <!--END Footer -->
 
@@ -125,6 +157,7 @@
   <div class="col-6">
     <!-- R1: Add Profile Tabs-->
   <button mat-raised-button color="primary" (click)="addTab(); scroll(target)">Add {{profileType}}</button>
+  
   </div>
   <div class="col-6"> <!-- R5: Next Option Section -->
     <button mat-raised-button color="primary" class="right" (click)="prepareToChangePage(1)">Next Section  ></button></div>

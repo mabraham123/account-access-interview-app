@@ -39,7 +39,6 @@ export class ModalComponent implements OnInit{
 
   loadNamesOfTypeSelected(){
     this.inputOptions=this.findInHashtable("type",this.type,"name");
-    console.log("blueredgreen");
     console.log(this.inputOptions);
   }
 

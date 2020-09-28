@@ -157,7 +157,7 @@
         </some-element>
 
         <some-element *ngSwitchCase=10>
-          <!-- Load Passwords Page -->
+          <!-- Load Final Page -->
           <mat-sidenav-container>
             <mat-sidenav [(opened)]="opened" mode="push">
               <h2><u><b>Account Graphs</b></u></h2>
@@ -206,20 +206,37 @@
 
                 <br>
                 <br>
-                <button mat-raised-button color="primary" (click)="save()">Save Results</button>
-                <button mat-raised-button  (click)="findBackdoors()">Find Backdoors</button>
+                <button mat-raised-button color="primary" (click)="save()">Save JSON</button>
+                <div class="col-12">
+                  <br>
+                  <br>
+                  <h2><b>Account Analysis: </b><button mat-button  color="warn" (click)="visualise()">Reset View</button></h2>
+                  
+                </div>
+                <div class="row">
+                <div class="col-6">
+                  <div class="col-12"><h3><b>Find Backdoors:</b></h3></div>
+                  <div class="col-6">
+                    <button mat-raised-button  (click)="findBackdoors('Device')">Devices</button>
+                    <button mat-raised-button  (click)="findBackdoors('Device')">Passwords</button>
+                    <button mat-raised-button  (click)="findBackdoors('Device')">Weak Backdoors</button>
+                    <button mat-raised-button  (click)="findBackdoors('Device')">Weak Backdoors</button>
+                  </div>
+                </div>
+                <br>
+                <div class="col-6">
+                  <div class="col-12"><h3><b>Identify Vertices:</b></h3></div>
+                  <div class="col-6">
+                    <button mat-raised-button  (click)="findCentralVertices()">Show Central Vertices</button>
+                  </div>
+                </div>
+              </div>
                 <br>
                 <br>
-                <div id="GraphVisualisation"></div>
+                <div id="GraphVisualisation"><p>Loading...</p></div>
               </div>
           </mat-sidenav-content>
           </mat-sidenav-container>
-          
-
-          
-
-
-          
           </some-element>
           
     

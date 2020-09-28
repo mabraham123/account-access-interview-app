@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
-//ViewContainerRef, ComponentFactoryResolver
+
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
@@ -80,6 +80,7 @@ export class DeviceComponent  implements OnInit{
 
 
   }
+
 
   updateObject(data){
     this.accountgraph[data.key].incoming=data.update;
@@ -234,5 +235,107 @@ prepareToChangePage(pageCode: number){
     this.prepareToChangePage(-1);
     }
   }
+  
+  /**
+* Method to create a duplicate of an existing index in the hashtable
+* Params:
+* duplicateName:string- name of the profile needed to be duplicated
+* duplicateType: string- By default is the current profiletype but can be set
+* Returns:
+* string: the key of the new creted duplicate item
+**/
+CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profileType): string {
+  let potentialKey=duplicateType+": "+duplicateName;
+  let number:number =1;
+  let entered=false;
+  while(this.accountgraph.hasOwnProperty(potentialKey)===true) {
+    entered=true;
+    console.log("got here")
+    potentialKey=duplicateType+": "+duplicateName+number;
+    number++
+  }
+
+  //Create item
+  if(entered){
+    this.accountgraph[potentialKey]={
+      name:duplicateName+number,
+      type: duplicateType,
+      ViewWhenLocked:"",
+      incoming:[]
+    }
+  }else{
+    this.accountgraph[potentialKey]={
+      name:duplicateName,
+      type: duplicateType,
+      ViewWhenLocked:"",
+      incoming:[]
+    }
+  }
+
+  if(duplicateType==this.profileType){
+    this.tabs.push(potentialKey);
+  }else{
+
+    if(entered){
+      this.DynamicallyCreatedKeys.push({
+        type: duplicateType,
+        key: duplicateName+number
+      });
+    }else{
+      this.DynamicallyCreatedKeys.push({
+        type: duplicateType,
+        key: duplicateName
+      });
+    }
+    
+    console.log("DynamicKeys:");
+    console.log(this.DynamicallyCreatedKeys);
+  }
+
+  console.log(this.accountgraph);
+  console.log(this.tabs);
+
+  return potentialKey;
+
+}
+
+
+  duplicateTab(index: number){
+    //Create a deep copy of an object from the acctound graph hash table
+    var toduplicate= JSON.parse(JSON.stringify(this.accountgraph[this.tabs[index]]));
+    
+    //Create a key to place the information that will be duplicated
+    let key=this.CreateDuplicateProfileInHashtable(toduplicate.name);
+    let created=this.accountgraph[key]; 
+   
+    //Set the correct name
+    toduplicate.name=created.name;
+    //Set the pointer to the duplicate object
+    this.accountgraph[key]=toduplicate;
+
+    console.log(this.accountgraph);
+    console.log(this.tabs);
+  }
+
+  ChangeProfileType(index: number,newtype: string){
+  //Create new key with name and newtype
+    let key=this.CreateDuplicateProfileInHashtable(this.accountgraph[this.tabs[index]].name,newtype);
+    let created=this.accountgraph[key];
+  //With the key deep copy everything from one key to another
+    var toduplicate= JSON.parse(JSON.stringify(this.accountgraph[this.tabs[index]]));
+  //Set the correct information  
+    toduplicate.name=created.name;
+    toduplicate.type=created.type;
+  //Set the pointer to the correct object
+    this.accountgraph[key]=toduplicate;
+
+  //Delete the old key
+    this.removeTab(index);
+
+    console.log(this.accountgraph);
+    console.log(this.tabs);
+  
+  }
+
 
 }
