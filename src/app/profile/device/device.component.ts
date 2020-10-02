@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-device',
@@ -17,9 +19,6 @@ export class DeviceComponent  implements OnInit{
     profileSlogan: string= 'What devices do you use to access the internet? '
     profileType: string= 'Device'
 
-
-  //tabs: any[] = [];
-  //notes: any[]= [];
   name: string;
   newname: string;
   oldname:string;
@@ -29,10 +28,12 @@ export class DeviceComponent  implements OnInit{
   remove: boolean;
   opened: boolean;
   DynamicallyCreatedKeys: any[]= [];
-  editing:boolean
+  editing:boolean;
+  typeOptions: string[];
+  TypesControl=new FormControl();
+  filteredOptions: Observable<string[]>;
   
-  //NoteNumber: number;
-  //private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
+
   constructor(){
     this.name= this.profileType;
     this.newname="";
@@ -43,15 +44,20 @@ export class DeviceComponent  implements OnInit{
     this.remove=false;
     this.opened=false;
     this.editing=false;
-    //this.NoteNumber=0;
+    this.typeOptions=['Device', 'Password Manager', 'Email', 'Social Media', 'Finance', 'Shopping', 'Entertainment', 'Gaming', 'Other', 'Password'];
     
   }
 
   ngOnInit(): void {
     console.log(this.tabs);
-
+    this.filteredOptions = this.TypesControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
+
+  
 
   /**
   * Method to add a tab from the array of tabs
@@ -71,6 +77,7 @@ export class DeviceComponent  implements OnInit{
       type: this.profileType,
       ViewWhenLocked:"",
       incoming:[]
+  
     }
 
     this.tabs.push(potentialKey);
@@ -236,7 +243,7 @@ prepareToChangePage(pageCode: number){
     }
   }
   
-  /**
+/**
 * Method to create a duplicate of an existing index in the hashtable
 * Params:
 * duplicateName:string- name of the profile needed to be duplicated
@@ -250,9 +257,10 @@ CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profi
   let entered=false;
   while(this.accountgraph.hasOwnProperty(potentialKey)===true) {
     entered=true;
+    number++
     console.log("got here")
     potentialKey=duplicateType+": "+duplicateName+number;
-    number++
+    
   }
 
   //Create item
@@ -269,6 +277,7 @@ CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profi
       type: duplicateType,
       ViewWhenLocked:"",
       incoming:[]
+
     }
   }
 
@@ -329,6 +338,30 @@ CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profi
   //Set the pointer to the correct object
     this.accountgraph[key]=toduplicate;
 
+    let idx:number=0;
+
+    for(let v in this.accountgraph){
+      for(let k in this.accountgraph[v].incoming){
+        for(let y in this.accountgraph[v].incoming[k].needed){
+          idx= this.accountgraph[v].incoming[k].needed[y].indexOf(this.tabs[index]);
+
+          if(idx>-1){
+            this.accountgraph[v].incoming[k].needed[idx]=key;
+          }
+        }
+      }
+    }
+
+    for(let a in this.accountgraph){
+      for(let b in this.accountgraph[a].opensessions){
+        idx=this.accountgraph[a].opensessions[b].indexOf(this.tabs[index]);
+
+        if(idx>-1){
+          this.accountgraph[a].opensessions[b]=key;
+        }
+      }
+    }
+
   //Delete the old key
     this.removeTab(index);
 
@@ -337,5 +370,25 @@ CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profi
   
   }
 
+  private _filter(value: string): string[]{
+    const filterValue= value.toLowerCase()
+    return this.typeOptions.filter(option =>
+      option.toLowerCase().startsWith(filterValue));
+  }
+
+  /**
+    * Method that updates the array holding the data types automattically 
+    * based on the types already created.
+    **/
+   updateTypeArray(){
+    //Itterate throught hashtable
+     for(let v in this.accountgraph){
+      //Check if type is in the type array
+      if((this.typeOptions.indexOf(this.accountgraph[v].type))<0){
+       //If it is not in the array add it
+       this.typeOptions.push(this.accountgraph[v].type);
+      }
+     }
+    }
 
 }

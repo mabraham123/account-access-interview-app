@@ -30,13 +30,6 @@ export class LoginMethodsComponent implements OnInit{
 
   ngOnInit(): void {
     this.options=this.OriginalIncoming;
-
-    //
-    // if (this.deviceObject.incoming.length<1) {
-    //   this.deviceObject.incoming=this.options;
-    // }else{
-    //   this.full=true;
-    // }
   }
 
   updateParentObjectArray(){

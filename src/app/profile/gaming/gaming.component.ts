@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-gaming',
@@ -17,8 +20,6 @@ export class GamingComponent implements OnInit {
   profileType: string= 'Gaming'
 
 
-//tabs: any[] = [];
-//notes: any[]= [];
 name: string;
 newname: string;
 oldname: string;
@@ -28,9 +29,11 @@ NumberofNotes: number;
 remove: boolean;
 opened: boolean;
 DynamicallyCreatedKeys: any[]= [];
+editing:boolean;
+typeOptions: string[];
+TypesControl=new FormControl();
+filteredOptions: Observable<string[]>;
 
-//NoteNumber: number;
-//private cvRef: ViewContainerRef, private resolver: ComponentFactoryResolver
 constructor(){
   this.name= this.profileType;
   this.newname="";
@@ -40,12 +43,19 @@ constructor(){
   this.NumberofNotes=0;
   this.remove=false;
   this.opened=false;
-  //this.NoteNumber=0;
+  this.editing=false;
+  this.typeOptions=['Device', 'Password Manager', 'Email', 'Social Media', 'Finance', 'Shopping', 'Entertainment', 'Gaming', 'Other', 'Password'];
+  
 }
 
 ngOnInit(): void {
-  console.log(this.tabs)
+  console.log(this.tabs);
+  this.filteredOptions = this.TypesControl.valueChanges.pipe(
+    startWith(''),
+    map(value => this._filter(value))
+  );
 }
+
 
 /**
 * Method to add a tab from the array of tabs
@@ -236,5 +246,153 @@ startOver(){
   this.prepareToChangePage(-1);
   }
 }
+
+/**
+* Method to create a duplicate of an existing index in the hashtable
+* Params:
+* duplicateName:string- name of the profile needed to be duplicated
+* duplicateType: string- By default is the current profiletype but can be set
+* Returns:
+* string: the key of the new creted duplicate item
+**/
+CreateDuplicateProfileInHashtable(duplicateName: string,duplicateType=this.profileType): string {
+  let potentialKey=duplicateType+": "+duplicateName;
+  let number:number =1;
+  let entered=false;
+  while(this.accountgraph.hasOwnProperty(potentialKey)===true) {
+    entered=true;
+    number++
+    console.log("got here")
+    potentialKey=duplicateType+": "+duplicateName+number;
+  }
+
+  //Create item
+  if(entered){
+    this.accountgraph[potentialKey]={
+      name:duplicateName+number,
+      type: duplicateType,
+      ViewWhenLocked:"",
+      incoming:[]
+    }
+  }else{
+    this.accountgraph[potentialKey]={
+      name:duplicateName,
+      type: duplicateType,
+      ViewWhenLocked:"",
+      incoming:[]
+
+    }
+  }
+
+  if(duplicateType==this.profileType){
+    this.tabs.push(potentialKey);
+  }else{
+
+    if(entered){
+      this.DynamicallyCreatedKeys.push({
+        type: duplicateType,
+        key: duplicateName+number
+      });
+    }else{
+      this.DynamicallyCreatedKeys.push({
+        type: duplicateType,
+        key: duplicateName
+      });
+    }
+    
+    console.log("DynamicKeys:");
+    console.log(this.DynamicallyCreatedKeys);
+  }
+
+  console.log(this.accountgraph);
+  console.log(this.tabs);
+
+  return potentialKey;
+
+}
+
+
+  duplicateTab(index: number){
+    //Create a deep copy of an object from the acctound graph hash table
+    var toduplicate= JSON.parse(JSON.stringify(this.accountgraph[this.tabs[index]]));
+    
+    //Create a key to place the information that will be duplicated
+    let key=this.CreateDuplicateProfileInHashtable(toduplicate.name);
+    let created=this.accountgraph[key]; 
+   
+    //Set the correct name
+    toduplicate.name=created.name;
+    //Set the pointer to the duplicate object
+    this.accountgraph[key]=toduplicate;
+
+    console.log(this.accountgraph);
+    console.log(this.tabs);
+  }
+
+  ChangeProfileType(index: number,newtype: string){
+  //Create new key with name and newtype
+    let key=this.CreateDuplicateProfileInHashtable(this.accountgraph[this.tabs[index]].name,newtype);
+    let created=this.accountgraph[key];
+  //With the key deep copy everything from one key to another
+    var toduplicate= JSON.parse(JSON.stringify(this.accountgraph[this.tabs[index]]));
+  //Set the correct information  
+    toduplicate.name=created.name;
+    toduplicate.type=created.type;
+  //Set the pointer to the correct object
+    this.accountgraph[key]=toduplicate;
+
+    let idx:number=0;
+
+    for(let v in this.accountgraph){
+      for(let k in this.accountgraph[v].incoming){
+        for(let y in this.accountgraph[v].incoming[k].needed){
+          idx= this.accountgraph[v].incoming[k].needed[y].indexOf(this.tabs[index]);
+
+          if(idx>-1){
+            this.accountgraph[v].incoming[k].needed[idx]=key;
+          }
+        }
+      }
+    }
+
+    for(let a in this.accountgraph){
+      for(let b in this.accountgraph[a].opensessions){
+        idx=this.accountgraph[a].opensessions[b].indexOf(this.tabs[index]);
+
+        if(idx>-1){
+          this.accountgraph[a].opensessions[b]=key;
+        }
+      }
+    }
+
+  //Delete the old key
+    this.removeTab(index);
+
+    console.log(this.accountgraph);
+    console.log(this.tabs);
+  
+  }
+
+  private _filter(value: string): string[]{
+    const filterValue= value.toLowerCase()
+    return this.typeOptions.filter(option =>
+      option.toLowerCase().startsWith(filterValue));
+  }
+
+  /**
+    * Method that updates the array holding the data types automattically 
+    * based on the types already created.
+    **/
+   updateTypeArray(){
+    //Itterate throught hashtable
+     for(let v in this.accountgraph){
+      //Check if type is in the type array
+      if((this.typeOptions.indexOf(this.accountgraph[v].type))<0){
+       //If it is not in the array add it
+       this.typeOptions.push(this.accountgraph[v].type);
+      }
+     }
+    }
+
 
 }

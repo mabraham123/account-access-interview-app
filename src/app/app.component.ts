@@ -308,15 +308,6 @@ export class AppComponent{
       console.log(this.participantIdentifier);
       this.participantIdentifierSet=true;
     }
-
-    checkInput(){
-      if(this.participantIdentifier===""){
-        alert("Press Enter");
-      }
-
-
-    }
-
     
 
 }

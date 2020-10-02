@@ -24,17 +24,11 @@ export class ModalComponent implements OnInit{
   ngOnInit(){
     this.updateTypeArray();
 
-    
-
     this.filteredOptions= this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
-    
-
-    
-
-
+ 
   }
 
   loadNamesOfTypeSelected(){

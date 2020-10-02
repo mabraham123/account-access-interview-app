@@ -86,28 +86,68 @@
         ></app-opensessions>
         <!--END Open Sessions Section-->
     
-        <!--START Footer -->
-        <br>
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <app-notes
-              [key]="tabs[index]"
-              [current]="accountgraph[tabs[index]].note"
-              (updateNote)="updateNote($event)">
-            </app-notes>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <!-- R4: Remove Profile Button-->
-              <button mat-raised-button color="warn" (click)="removeTab(index)" class="right">
-                Delete {{profileType}}
-              </button>
-            </div>
-          </div>
+         <!--START Footer -->
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <app-notes
+          [key]="tabs[index]"
+          [current]="accountgraph[tabs[index]].note"
+          (updateNote)="updateNote($event)">
+        </app-notes>
         </div>
-        <!--END Footer -->
+      </div>
+      <br>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <br>
+      <!--START interviewer Edits-->
+      <mat-accordion>
+        <mat-expansion-panel (opened)="updateTypeArray()">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Interviewer Edits
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+          <!--START of change data type-->
+          <h2><b>Change the type</b></h2>
+            <form>
+              <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
+                <mat-lable>What type do you want to change this too?</mat-lable>
+                <input matInput type="text" [matAutocomplete]="auto" [formControl]="TypesControl" #newtype>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}  
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <button mat-raised-button (click)="ChangeProfileType(index,newtype.value)" color="primary">Change Type</button>
+            </form>
+            <!--END of change data type-->
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h2><b>Other Edits</b></h2>
+          <!--Duplicate profile feature-->
+          <button mat-raised-button color="primary" (click)="duplicateTab(index)">
+            Duplicate {{profileType}}
+          </button>
+           <!-- R4: Remove Profile Button-->
+           <button mat-raised-button color="warn" (click)="removeTab(index)">
+            Delete {{profileType}}
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!--END interviewer Edits-->
+      <br>
+      <br>
+
+    </div>
+  <!--END Footer -->
     
       </ng-template>
       </mat-tab>

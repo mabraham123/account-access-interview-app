@@ -35,7 +35,9 @@ sessions: any[] = [];
 
 
   ngOnInit(): void {
-    this.sessions=this.OriginalOpenSessions;
+    if(this.OriginalOpenSessions !== undefined){
+      this.sessions=this.sessions.concat(this.OriginalOpenSessions);
+    }
   }
 
   updateParentObjectArray(){
@@ -69,6 +71,7 @@ sessions: any[] = [];
         
         let name=result.type+": "+result.nickname;
         console.log(name);
+        console.log(this.sessions);
         this.sessions.push(name);
         console.log(this.sessions);
 

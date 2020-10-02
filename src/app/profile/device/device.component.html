@@ -107,29 +107,36 @@
         <mat-divider></mat-divider>
         <br>
         <br>
-
+        <!--START interviewer Edits-->
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel (opened)="updateTypeArray()">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Interview Edits
+                Interviewer Edits
               </mat-panel-title>
 
             </mat-expansion-panel-header>
+            <!--START of change data type-->
             <h2><b>Change the type</b></h2>
               <form>
                 <mat-form-field appearance="fill" floatLabel="always" class="questionbox">
                   <mat-lable>What type do you want to change this too?</mat-lable>
-                  <input matInput type="text" #newtype>
+                  <input matInput type="text" [matAutocomplete]="auto" [formControl]="TypesControl" #newtype>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}  
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-form-field>
                 <button mat-raised-button (click)="ChangeProfileType(index,newtype.value)" color="primary">Change Type</button>
               </form>
+              <!--END of change data type-->
               <br>
               <mat-divider></mat-divider>
               <br>
               <br>
               <h2><b>Other Edits</b></h2>
-              
+            <!--Duplicate profile feature-->
             <button mat-raised-button color="primary" (click)="duplicateTab(index)">
               Duplicate {{profileType}}
             </button>
@@ -139,6 +146,7 @@
             </button>
           </mat-expansion-panel>
         </mat-accordion>
+        <!--END interviewer Edits-->
         <br>
         <br>
 

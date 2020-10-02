@@ -1,9 +1,4 @@
 <div class="container">
-
-
-  
-
-  
   <container-element [ngSwitch]="currentPage">
     <some-element *ngSwitchCase=-1>
     <mat-sidenav-container>
@@ -218,8 +213,8 @@
                   <div class="col-12"><h3><b>Find Backdoors:</b></h3></div>
                   <div class="col-6">
                     <button mat-raised-button  (click)="findBackdoors('Device')">Devices</button>
-                    <button mat-raised-button  (click)="findBackdoors('Device')">Passwords</button>
-                    <button mat-raised-button  (click)="findBackdoors('Device')">Weak Backdoors</button>
+                    <button mat-raised-button  (click)="findBackdoors('Password')">Passwords</button>
+                    <button mat-raised-button  (click)="findBackdoors('Email')">Emails</button>
                     <button mat-raised-button  (click)="findBackdoors('Device')">Weak Backdoors</button>
                   </div>
                 </div>
