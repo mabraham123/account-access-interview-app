@@ -205,7 +205,11 @@
                 <div class="col-12">
                   <br>
                   <br>
-                  <h2><b>Account Analysis: </b><button mat-button  color="warn" (click)="visualise()">Reset View</button></h2>
+                  <h2><b>Account Analysis: </b>
+                  <button mat-button  color="warn" (click)="visualise()">Reset View</button>
+                  <label for="scaleSVG">Scale to fit: </label>
+                  <input type="checkbox" id="scaleSVG" (click)="toggleScaleToFit()">
+                  </h2>
                   
                 </div>
                 <div class="row">
@@ -215,7 +219,7 @@
                     <button mat-raised-button  (click)="findBackdoors('Device')">Devices</button>
                     <button mat-raised-button  (click)="findBackdoors('Password')">Passwords</button>
                     <button mat-raised-button  (click)="findBackdoors('Email')">Emails</button>
-                    <button mat-raised-button  (click)="findBackdoors('Device')">Weak Backdoors</button>
+                    <button mat-raised-button  (click)="findBackdoors('Social Media')">Social Media</button>
                   </div>
                 </div>
                 <br>

@@ -255,7 +255,7 @@ export class AppComponent{
 
       findBackdoors(Findtype:string){
         console.log("Find backdoors in results");
-         var arg = { "transform": "akv(color,yellow,backdoors(type(Findtype)))" };
+         var arg = { "transform": "akv(color,yellow,backdoors(type("+Findtype+")))" };
          this.visualise(arg);
       }
 
@@ -263,6 +263,33 @@ export class AppComponent{
         console.log("Find Central Vertices in results");
         var arg = { "transform": "top_sc()" };
         this.visualise(arg);
+      }
+
+      toggleScaleToFit(){
+        const cbox= document.getElementById('scaleSVG') as HTMLInputElement;
+        var mysvg = document.getElementsByTagName('svg')[0];
+        var fullwidth, fullheight;
+        
+        if (mysvg){
+          fullwidth = mysvg.getAttribute('fullwidth');
+          fullheight = mysvg.getAttribute('fullheight');
+
+          if(!fullwidth){
+            fullwidth = mysvg.getAttribute('width');
+            fullheight = mysvg.getAttribute('height');
+            mysvg.setAttribute('fullwidth',fullwidth);
+            mysvg.setAttribute('fullheight',fullheight);
+          }
+        }
+
+        if(cbox && cbox.checked){
+          mysvg.setAttribute('width', '100%');
+          mysvg.setAttribute('height','auto');
+        }
+        if(cbox && !cbox.checked){
+          mysvg.setAttribute('width', fullwidth);
+          mysvg.setAttribute('height',fullheight);
+        }
       }
 
 
@@ -283,6 +310,7 @@ export class AppComponent{
                   element.innerHTML = output;
                   div.innerHTML = "";
                   div.appendChild(element);
+                  this.toggleScaleToFit();
                 }else if (xmlhttp.readyState == 4) {
                   console.log('Alert: ', xmlhttp.statusText);
                 }
